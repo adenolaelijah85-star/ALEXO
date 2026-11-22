@@ -140,6 +140,21 @@ body {
 
 .admin-heading { margin-bottom: 32px; }
 
+.page-back-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 8px;
+  color: var(--admin-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.page-back-link svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.page-back-link:hover { color: var(--admin-ink); }
+.page-back-link:focus-visible { outline: 2px solid var(--admin-olive); outline-offset: 3px; border-radius: 4px; }
+
 .admin-eyebrow {
   margin: 0 0 10px;
   color: var(--admin-olive);

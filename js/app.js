@@ -141,11 +141,17 @@
 
   var quickAddDialog = document.getElementById("quickAddDialog");
   var quickAddTitle = document.getElementById("quickAddTitle");
-  var quickAddVariant = document.getElementById("quickAddVariant");
+  var quickAddSizes = document.getElementById("quickAddSizes");
+  var quickAddColors = document.getElementById("quickAddColors");
+  var quickAddSelectedSize = document.getElementById("quickAddSelectedSize");
+  var quickAddSelectedColor = document.getElementById("quickAddSelectedColor");
+  var quickAddPrice = document.getElementById("quickAddPrice");
   var quickAddStatus = document.getElementById("quickAddStatus");
   var quickAddSubmit = document.getElementById("quickAddSubmit");
   var activeQuickAddProduct = null;
   var activeQuickAddOptions = [];
+  var selectedQuickAddSize = "";
+  var selectedQuickAddColor = "";
 
   function getQuickAddOptions(product) {
     if (Array.isArray(product.variants) && product.variants.length) {
@@ -191,11 +197,48 @@
     }, []);
   }
 
-  if (quickAddDialog && quickAddVariant && quickAddSubmit) {
-    quickAddVariant.addEventListener("change", function () {
-      quickAddSubmit.disabled = quickAddVariant.value === "";
-      quickAddStatus.textContent = "";
+  function getSelectedQuickAddOption() {
+    if (!selectedQuickAddSize || !selectedQuickAddColor) return null;
+    return activeQuickAddOptions.find(function (option) {
+      return option.size === selectedQuickAddSize && option.color === selectedQuickAddColor;
+    }) || null;
+  }
+
+  function hasQuickAddOption(size, color) {
+    return activeQuickAddOptions.some(function (option) {
+      return option.size === size && option.color === color;
     });
+  }
+
+  function updateQuickAddChoices() {
+    quickAddSelectedSize.textContent = selectedQuickAddSize || "Choose a size";
+    quickAddSelectedColor.textContent = selectedQuickAddColor || "Choose a color";
+
+    quickAddSizes.querySelectorAll("button").forEach(function (button) {
+      var isSelected = button.dataset.quickAddSize === selectedQuickAddSize;
+      button.setAttribute("aria-pressed", String(isSelected));
+      button.classList.toggle("is-selected", isSelected);
+    });
+
+    quickAddColors.querySelectorAll("button").forEach(function (button) {
+      var color = button.dataset.quickAddColor;
+      var isSelected = color === selectedQuickAddColor;
+      button.disabled = Boolean(selectedQuickAddSize) &&
+        !hasQuickAddOption(selectedQuickAddSize, color);
+      button.setAttribute("aria-pressed", String(isSelected));
+      button.classList.toggle("is-selected", isSelected);
+    });
+
+    var option = getSelectedQuickAddOption();
+    quickAddSubmit.disabled = !option;
+    quickAddPrice.textContent = option
+      ? "Price: " + window.ALEXO_formatMoney(option.price, option.currency)
+      : activeQuickAddOptions.length
+        ? "Choose a size and color to see the price."
+        : "Price unavailable.";
+  }
+
+  if (quickAddDialog && quickAddSizes && quickAddColors && quickAddSubmit) {
 
     document.getElementById("quickAddClose").addEventListener("click", function () {
       quickAddDialog.close();
@@ -214,8 +257,7 @@
     });
 
     quickAddSubmit.addEventListener("click", function () {
-      var optionIndex = Number(quickAddVariant.value);
-      var option = quickAddVariant.value === "" ? null : activeQuickAddOptions[optionIndex];
+      var option = getSelectedQuickAddOption();
       if (!activeQuickAddProduct || !option) {
         quickAddStatus.textContent = "Choose a size and color before adding this item.";
         return;
@@ -240,9 +282,10 @@
       });
 
       if (window.ALEXO_refreshBagCount) window.ALEXO_refreshBagCount();
+      selectedQuickAddSize = "";
+      selectedQuickAddColor = "";
+      updateQuickAddChoices();
       quickAddStatus.textContent = activeQuickAddProduct.name + " added to your bag.";
-      quickAddVariant.value = "";
-      quickAddSubmit.disabled = true;
     });
   }
 
@@ -251,22 +294,62 @@
     activeQuickAddOptions = getQuickAddOptions(product);
     quickAddTitle.textContent = product.name || "Add to Bag";
     quickAddStatus.textContent = "";
-    quickAddVariant.replaceChildren();
+    selectedQuickAddSize = "";
+    selectedQuickAddColor = "";
+    quickAddSizes.replaceChildren();
+    quickAddColors.replaceChildren();
 
-    var placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.textContent = "Choose an option";
-    quickAddVariant.appendChild(placeholder);
-
-    activeQuickAddOptions.forEach(function (option, index) {
-      var item = document.createElement("option");
-      item.value = String(index);
-      item.textContent = option.size + " · " + option.color + " — " +
-        window.ALEXO_formatMoney(option.price, option.currency);
-      quickAddVariant.appendChild(item);
+    Array.from(new Set(activeQuickAddOptions.map(function (option) {
+      return option.size;
+    }))).forEach(function (size) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "quick-add-dialog__size-choice";
+      button.dataset.quickAddSize = size;
+      button.textContent = size;
+      button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", function () {
+        selectedQuickAddSize = size;
+        if (selectedQuickAddColor && !hasQuickAddOption(size, selectedQuickAddColor)) {
+          selectedQuickAddColor = "";
+        }
+        quickAddStatus.textContent = "";
+        updateQuickAddChoices();
+      });
+      quickAddSizes.appendChild(button);
     });
 
-    quickAddSubmit.disabled = true;
+    var colors = [];
+    activeQuickAddOptions.forEach(function (option) {
+      if (!colors.some(function (color) { return color.name === option.color; })) {
+        colors.push({ name: option.color, hex: option.colorHex });
+      }
+    });
+    colors.forEach(function (color) {
+      var button = document.createElement("button");
+      var swatch = document.createElement("span");
+      button.type = "button";
+      button.className = "quick-add-dialog__color-choice";
+      button.dataset.quickAddColor = color.name;
+      button.setAttribute("aria-label", "Choose color " + color.name);
+      button.setAttribute("aria-pressed", "false");
+      swatch.className = "quick-add-dialog__swatch";
+      swatch.setAttribute("aria-hidden", "true");
+      swatch.style.backgroundColor = color.hex || "#1a1a1a";
+      button.appendChild(swatch);
+      button.appendChild(document.createTextNode(color.name));
+      button.addEventListener("click", function () {
+        selectedQuickAddColor = color.name;
+        if (selectedQuickAddSize && !hasQuickAddOption(selectedQuickAddSize, color.name)) {
+          selectedQuickAddSize = "";
+        }
+        quickAddStatus.textContent = "";
+        updateQuickAddChoices();
+      });
+      quickAddColors.appendChild(button);
+    });
+
+    updateQuickAddChoices();
     if (!activeQuickAddOptions.length) {
       quickAddStatus.textContent = "This product is currently unavailable.";
     }
