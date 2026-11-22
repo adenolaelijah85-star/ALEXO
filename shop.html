@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All — ALEXO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/site-refresh.css">
+</head>
+<body>
+
+<aside class="announcement-bar" aria-label="Store announcement">
+  <p><strong>THE ALEXO EDIT</strong> — Effortless style, your way.</p>
+  <a href="shop.html">Explore the collection <span aria-hidden="true">→</span></a>
+</aside>
+
+<div class="page">
+
+  <!-- ============ HEADER (same as homepage — do not duplicate/alter) ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+
+      <a href="index.html" class="logo" aria-label="ALEXO home">ALEXO</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Search" data-action="open-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        </a>
+        <a href="account.html" class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.6-3.6 5-5.5 7.5-5.5s5.9 1.9 7.5 5.5"/></svg>
+        </a>
+        <a href="cart.html" class="icon-btn icon-btn--bag" aria-label="Bag, empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="bag-count">0</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="shop-campaign-slider" data-campaign-slider aria-label="Featured collections" aria-roledescription="carousel">
+    <div class="shop-campaign-slider__viewport">
+      <div class="shop-campaign-slider__track" data-campaign-track>
+        <article class="campaign-banner campaign-banner--shop shop-campaign-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+          <div class="campaign-banner__copy">
+            <p class="campaign-banner__eyebrow">THE ALEXO EDIT</p>
+            <h2 id="shopCampaignTitle-1">New season.<br>Style your way.</h2>
+            <p>Discover refined pieces for everyday wear.</p>
+            <a href="shop.html?filter=new" class="btn btn--dark">Explore new arrivals</a>
+          </div>
+          <div class="campaign-banner__image">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000&q=80&auto=format&fit=crop" alt="" aria-hidden="true" loading="eager">
+          </div>
+        </article>
+        <article class="campaign-banner campaign-banner--shop shop-campaign-slide" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true" inert>
+          <div class="campaign-banner__copy">
+            <p class="campaign-banner__eyebrow">THE SUMMER EDIT</p>
+            <h2 id="shopCampaignTitle-2">Made for moments<br>in the sun.</h2>
+            <p>Light layers and considered pieces for bright days.</p>
+            <a href="shop.html?search=linen" class="btn btn--dark">Shop the summer edit</a>
+          </div>
+          <div class="campaign-banner__image">
+            <img src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=1000&q=80&auto=format&fit=crop" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </article>
+        <article class="campaign-banner campaign-banner--shop shop-campaign-slide" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true" inert>
+          <div class="campaign-banner__copy">
+            <p class="campaign-banner__eyebrow">TIMELESS ELEGANCE</p>
+            <h2 id="shopCampaignTitle-3">Quiet confidence.<br>Every day.</h2>
+            <p>Timeless silhouettes chosen to move with you.</p>
+            <a href="shop.html?search=blazer" class="btn btn--dark">Discover the edit</a>
+          </div>
+          <div class="campaign-banner__image">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&q=80&auto=format&fit=crop" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="shop-campaign-slider__controls" role="group" aria-label="Campaign slider controls">
+      <button class="shop-campaign-slider__arrow" type="button" data-campaign-prev aria-label="Previous campaign">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="shop-campaign-slider__dots" data-campaign-dots role="group" aria-label="Choose a campaign"></div>
+      <button class="shop-campaign-slider__arrow" type="button" data-campaign-next aria-label="Next campaign">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="shop-campaign-slider__toggle" type="button" data-campaign-toggle>Play</button>
+    </div>
+  </section>
+
+  <!-- ============ SHOP HEADING ============ -->
+  <section class="shop-heading">
+    <div class="shop-heading__title">
+      <h1>Shop All</h1>
+      <p>Fashion for every style</p>
+    </div>
+    <div class="shop-heading__meta">
+      <span class="results-count">Showing 1–12 of 126 results</span>
+      <button class="sort-select" data-open-sheet="sortSheet">
+        Sort by
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ MOBILE FILTER/SORT TOOLBAR ============ -->
+  <div class="shop-toolbar-mobile">
+    <button class="toolbar-btn" data-open-sheet="filterSheet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      Filter
+    </button>
+    <button class="toolbar-btn" data-open-sheet="sortSheet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4v16M4 8l3-4 3 4M17 20V4M14 16l3 4 3-4"/></svg>
+      Sort
+    </button>
+  </div>
+
+  <!-- ============ CATALOG: FILTER SIDEBAR + PRODUCT GRID ============ -->
+  <div class="shop-catalog">
+
+    <!-- Desktop filter sidebar -->
+    <aside class="shop-filters">
+
+      <div class="filter-group">
+        <div class="filter-group__head">
+          <h3>Categories</h3>
+          <button class="filter-clear">Clear All</button>
+        </div>
+        <ul class="filter-radio-list">
+          <li><label><input type="radio" name="category" checked><span class="radio-dot"></span>All Categories</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>New In</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>Tops</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>Dresses</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>Outerwear</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>Bottoms</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>Co-ords</label></li>
+          <li><label><input type="radio" name="category"><span class="radio-dot"></span>Accessories</label></li>
+        </ul>
+      </div>
+
+      <div class="filter-group">
+        <h3>Sizes</h3>
+        <div class="size-pills">
+          <button>XS</button><button>S</button><button>M</button>
+          <button>L</button><button>XL</button><button>XXL</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Colors</h3>
+        <div class="color-swatch-list">
+          <button style="background:#1a1a1a" aria-label="Black"></button>
+          <button style="background:#ffffff;border:1px solid var(--color-border)" aria-label="White"></button>
+          <button style="background:#9a9a9a" aria-label="Grey"></button>
+          <button style="background:#a68a68" aria-label="Tan"></button>
+          <button style="background:#4a6fd1" aria-label="Blue"></button>
+          <button style="background:#e893b8" aria-label="Pink"></button>
+          <button style="background:#4f9d63" aria-label="Green"></button>
+        </div>
+        <button class="text-link filter-more">+ More</button>
+      </div>
+
+      <div class="filter-group">
+        <h3>Price</h3>
+        <div class="price-slider price-slider--functional">
+          <input class="price-min-input" type="range" min="0" max="200" value="0" step="1" aria-label="Minimum price">
+          <input class="price-max-input" type="range" min="0" max="200" value="200" step="1" aria-label="Maximum price">
+        </div>
+        <div class="price-slider__labels"><span class="price-min-value">₦0.00</span><span class="price-max-value">₦200.00</span></div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Brands</h3>
+        <ul class="filter-checkbox-list">
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Zara</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Mango</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>H&amp;M</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Nike</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Adidas</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Pull&amp;Bear</label></li>
+        </ul>
+        <button class="text-link filter-more">+ More</button>
+      </div>
+
+    </aside>
+
+    <!-- Product grid (same component as homepage) -->
+    <div class="product-grid shop-product-grid" id="shopProductGrid" data-product-grid data-product-source="ALEXO_PRODUCTS"></div>
+
+  </div>
+
+  <dialog class="quick-add-dialog" id="quickAddDialog" aria-labelledby="quickAddTitle">
+    <div class="quick-add-dialog__content">
+      <button class="quick-add-dialog__close" id="quickAddClose" type="button" aria-label="Close quick add">×</button>
+      <p class="quick-add-dialog__eyebrow">QUICK ADD</p>
+      <h2 class="quick-add-dialog__title" id="quickAddTitle"></h2>
+      <label class="quick-add-dialog__label" for="quickAddVariant">Choose size and color</label>
+      <select class="quick-add-dialog__select" id="quickAddVariant">
+        <option value="">Choose an option</option>
+      </select>
+      <p class="quick-add-dialog__status" id="quickAddStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn--dark btn--block quick-add-dialog__submit" id="quickAddSubmit" type="button" disabled>
+        <span>Add to Bag</span>
+      </button>
+    </div>
+  </dialog>
+
+  <div class="shop-load-more">
+    <button class="btn btn--outline">
+      <span>Load More</span>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+    </button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="index.html" class="logo">ALEXO</a>
+        <p>A modern fashion destination for those who love style, quality, and elegance.</p>
+        <div class="site-footer__social">
+          <a href="#" data-social="instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" data-social="facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg>
+          </a>
+          <a href="#" data-social="pinterest" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 18c1-3 1.5-6 2-9M12 12c2 1 4-1 4-3.2 0-2-1.7-3.3-4-3.3-2.6 0-4.5 1.9-4.5 4.1 0 1.2.6 2 1.3 2.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#" data-store-email>Contact Us</a></li>
+          <li><a href="orders.html">Track Order</a></li>
+          <li><a href="#" data-policy="shipping_policy_url">Shipping &amp; Delivery</a></li>
+          <li><a href="#" data-policy="returns_policy_url">Returns &amp; Exchanges</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col" data-dynamic-links>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#" data-policy="privacy_url">Privacy Policy</a></li>
+          <li><a href="#" data-policy="terms_url">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Contact</h3>
+        <address>
+          <span data-store-contact-placeholder>Contact details pending store setup</span>
+          <a href="#" data-store-email>Support contact pending</a>
+          <span data-store-country></span>
+        </address>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 ALEXO. All Rights Reserved.</span>
+      <div>
+        <a href="#" data-policy="privacy_url">Privacy</a>
+        <a href="#" data-policy="terms_url">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============ MOBILE BOTTOM SHEETS ============ -->
+<div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+
+<div class="bottom-sheet" id="filterSheet" aria-hidden="true">
+  <div class="bottom-sheet__handle" aria-hidden="true"></div>
+  <div class="bottom-sheet__header">
+    <h3>Filters</h3>
+    <button class="bottom-sheet__close" data-close-sheet aria-label="Close filters">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="bottom-sheet__body">
+
+    <div class="filter-accordion is-open">
+      <button class="filter-accordion__trigger">
+        Categories
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10l4-4 4 4"/></svg>
+      </button>
+      <div class="filter-accordion__panel">
+        <ul class="filter-radio-list">
+          <li><label><input type="radio" name="category-m" checked><span class="radio-dot"></span>All Categories</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>New In</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>Tops</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>Dresses</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>Outerwear</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>Bottoms</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>Co-ords</label></li>
+          <li><label><input type="radio" name="category-m"><span class="radio-dot"></span>Accessories</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="filter-accordion">
+      <button class="filter-accordion__trigger">
+        Sizes
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="filter-accordion__panel">
+        <div class="size-pills">
+          <button>XS</button><button>S</button><button>M</button>
+          <button>L</button><button>XL</button><button>XXL</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-accordion">
+      <button class="filter-accordion__trigger">
+        Colors
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="filter-accordion__panel">
+        <div class="color-swatch-list">
+          <button style="background:#1a1a1a" aria-label="Black"></button>
+          <button style="background:#ffffff;border:1px solid var(--color-border)" aria-label="White"></button>
+          <button style="background:#9a9a9a" aria-label="Grey"></button>
+          <button style="background:#a68a68" aria-label="Tan"></button>
+          <button style="background:#4a6fd1" aria-label="Blue"></button>
+          <button style="background:#e893b8" aria-label="Pink"></button>
+          <button style="background:#4f9d63" aria-label="Green"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-accordion">
+      <button class="filter-accordion__trigger">
+        Price
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="filter-accordion__panel">
+        <div class="price-slider price-slider--functional">
+          <input class="price-min-input" type="range" min="0" max="200" value="0" step="1" aria-label="Minimum price">
+          <input class="price-max-input" type="range" min="0" max="200" value="200" step="1" aria-label="Maximum price">
+        </div>
+        <div class="price-slider__labels"><span class="price-min-value">₦0.00</span><span class="price-max-value">₦200.00</span></div>
+      </div>
+    </div>
+
+    <div class="filter-accordion">
+      <button class="filter-accordion__trigger">
+        Brands
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <div class="filter-accordion__panel">
+        <ul class="filter-checkbox-list">
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Zara</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Mango</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>H&amp;M</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Nike</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Adidas</label></li>
+          <li><label><input type="checkbox"><span class="checkbox-box"></span>Pull&amp;Bear</label></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-sheet__footer">
+    <button class="btn btn--dark btn--block" data-close-sheet><span>Apply Filters</span></button>
+    <button class="text-link" id="clearFiltersBtn">Clear All</button>
+  </div>
+</div>
+
+<div class="bottom-sheet" id="sortSheet" aria-hidden="true">
+  <div class="bottom-sheet__handle" aria-hidden="true"></div>
+  <div class="bottom-sheet__header">
+    <h3>Sort By</h3>
+    <button class="bottom-sheet__close" data-close-sheet aria-label="Close sort options">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="bottom-sheet__body">
+    <ul class="filter-radio-list filter-radio-list--sort">
+      <li><label><input type="radio" name="sort" value="featured" checked><span class="radio-dot"></span>Featured</label></li>
+      <li><label><input type="radio" name="sort" value="newest"><span class="radio-dot"></span>New Arrivals</label></li>
+      <li><label><input type="radio" name="sort" value="price-asc"><span class="radio-dot"></span>Price: Low to High</label></li>
+      <li><label><input type="radio" name="sort" value="price-desc"><span class="radio-dot"></span>Price: High to Low</label></li>
+    </ul>
+  </div>
+
+  <div class="bottom-sheet__footer">
+    <button class="btn btn--dark btn--block" data-close-sheet><span>Apply</span></button>
+  </div>
+</div>
+
+<!-- ALEXO Search Overlay -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <div class="search-overlay__inner">
+    <div class="search-overlay__top">
+      <div class="search-overlay__brand">ALEXO</div>
+      <button class="search-overlay__close" id="searchClose" type="button" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <form class="search-form" id="alexSearchForm" role="search">
+      <span class="search-form__label">Search ALEXO</span>
+      <input id="alexSearchInput" name="search" type="search" autocomplete="off" placeholder="What are you looking for?" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+
+    <section class="search-suggestions" aria-live="polite">
+      <div class="search-suggestions__heading">
+        <h2>Suggestions</h2>
+        <span id="searchSuggestionCount">Popular products</span>
+      </div>
+      <div class="search-suggestions__list" id="searchSuggestionsList"></div>
+    </section>
+
+    <section class="search-popular">
+      <p class="search-popular__title">Popular searches</p>
+      <div class="search-popular__list">
+        <button type="button" data-search-term="blazer">Blazers</button>
+        <button type="button" data-search-term="dress">Dresses</button>
+        <button type="button" data-search-term="shirt">Shirts</button>
+        <button type="button" data-search-term="shoes">Shoes</button>
+        <button type="button" data-search-term="bag">Bags</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="js/data-service.js"></script>
+<script src="js/products-data.js"></script>
+<script src="js/backend-config.js"></script>
+<script src="js/storefront-api.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/shop-campaign-slider.js"></script>
+</body>
+</html>

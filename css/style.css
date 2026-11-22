@@ -1,0 +1,104 @@
+/* ==========================================================================
+   ALEXO — Base styles, design tokens, page grid
+   ========================================================================== */
+
+:root {
+  /* Color */
+  --color-bg:          #ffffff;
+  --color-bg-soft:     #f6f5f2;
+  --color-ink:         #17181a;
+  --color-ink-soft:    #6f7072;
+  --color-border:      #e8e6e1;
+  --color-accent:      #17181a;
+  --color-accent-text: #ffffff;
+
+  /* Type */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Spacing scale */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Layout */
+  --page-max: 1400px;
+  --page-pad: 24px;
+  --header-h: 84px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul { list-style: none; margin: 0; padding: 0; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Page-level layout
+   No sidebar: header and hero (and, later, Brands / Best Collection) are
+   sequential full-width sections stacked in document order. Each section
+   manages its own internal columns where needed (the hero has three).
+   ========================================================================== */
+
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}

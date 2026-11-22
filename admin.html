@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALEXO | Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<header class="admin-topbar">
+  <div class="admin-topbar__inner">
+    <a class="admin-brand" href="index.html" aria-label="ALEXO storefront">
+      <span class="admin-brand__name">ALEXO</span>
+      <span class="admin-brand__label">Admin</span>
+    </a>
+    <div class="admin-account">
+      <div class="admin-account__identity">
+        <span class="admin-account__label">Signed in as</span>
+        <span id="who"></span>
+      </div>
+      <button type="button" id="signOut" class="admin-button">Sign out</button>
+    </div>
+  </div>
+</header>
+<main class="admin-main">
+  <section class="admin-banner" aria-labelledby="adminBannerTitle">
+    <div class="admin-banner__copy">
+      <p class="admin-eyebrow">The ALEXO edit · Admin</p>
+      <h2 id="adminBannerTitle">Curate your next signature look.</h2>
+      <p>Keep the collection considered, current, and ready to discover.</p>
+      <a class="admin-banner__link" href="#productPanel">
+        <span>Add a product</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+    <div class="admin-banner__image">
+      <img src="images/products/a.jpg" alt="ALEXO campaign look">
+    </div>
+  </section>
+  <div class="admin-heading">
+    <p class="admin-eyebrow">Store management</p>
+    <h1>Product inventory</h1>
+    <p>Manage your catalog, product visibility, and stock levels.</p>
+  </div>
+  <section class="admin-panel admin-product-form" id="productPanel" aria-labelledby="productFormHeading" hidden>
+    <div class="admin-panel__heading">
+      <div>
+        <h2 id="productFormHeading">Add a product</h2>
+        <p>Enter the product details for your shop.</p>
+      </div>
+      <span class="admin-panel__badge">New product</span>
+    </div>
+    <form id="productForm">
+      <div class="admin-form-grid">
+        <div class="admin-field"><label for="pName">Product name</label><input id="pName" required maxlength="200"></div>
+        <div class="admin-field"><label for="pSku">SKU (short code, e.g. LINEN-SHIRT)</label><input id="pSku" required maxlength="40"></div>
+        <div class="admin-field"><label for="pCategory">Category</label>
+          <select id="pCategory" required>
+            <option value="">Choose…</option>
+            <option>Tops</option><option>Dresses</option><option>Outerwear</option>
+            <option>Bottoms</option><option>Co-ords</option><option>Accessories</option>
+          </select></div>
+        <div class="admin-field"><label for="pGender">For</label>
+          <select id="pGender">
+            <option value="women">Women</option><option value="men">Men</option><option value="unisex">Unisex</option>
+          </select></div>
+        <div class="admin-field"><label for="pPrice">Price (₦)</label><input id="pPrice" type="number" min="1" step="0.01" required></div>
+        <div class="admin-field"><label for="pSizes">Sizes (separate with commas)</label><input id="pSizes" placeholder="S, M, L" required></div>
+        <div class="admin-field"><label for="pStock">Stock for each size</label><input id="pStock" type="number" min="0" step="1" value="10" required></div>
+        <div class="admin-field admin-field--wide">
+          <label for="pColor">Colours (separate with commas)</label>
+          <input id="pColor" placeholder="White, Sky Blue" required maxlength="240">
+          <p class="admin-field__hint">Each colour is added as an available product variant.</p>
+        </div>
+        <div class="admin-field admin-field--wide">
+          <label for="pImageFile">Product image</label>
+          <input id="pImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif" aria-describedby="imageUploadHint">
+          <p class="admin-field__hint" id="imageUploadHint">Upload a JPG, PNG, WebP, or AVIF image (maximum 10 MB).</p>
+          <img class="admin-image-preview" id="imagePreview" alt="Selected product preview" hidden>
+        </div>
+        <div class="admin-field admin-field--wide"><label for="pImage">Or use an image URL (https://)</label><input id="pImage" type="url" placeholder="https://..."></div>
+        <div class="admin-field admin-field--wide"><label for="pDesc">Description</label><textarea id="pDesc" rows="3" maxlength="2000"></textarea></div>
+      </div>
+      <div class="admin-form-checks">
+        <label><input type="checkbox" id="pNew"> New arrival</label>
+        <label><input type="checkbox" id="pLive" checked> Show in the shop</label>
+      </div>
+      <button type="submit" class="admin-form-button">Add product</button>
+      <p class="msg" id="formMessage" role="status"></p>
+    </form>
+  </section>
+  <section class="admin-panel admin-bulk-import" id="bulkImportPanel" aria-labelledby="bulkImportHeading" hidden>
+    <div class="admin-panel__heading">
+      <div>
+        <h2 id="bulkImportHeading">Add products from CSV</h2>
+        <p>Review the file before creating products in the shop.</p>
+      </div>
+      <span class="admin-panel__badge">Bulk import</span>
+    </div>
+    <div class="admin-bulk-import__body">
+      <div class="admin-field">
+        <label for="bulkProductsFile">Product CSV</label>
+        <input id="bulkProductsFile" type="file" accept=".csv,text/csv">
+        <p class="admin-field__hint">Use the ALEXO product import CSV. Each size and colour combination becomes a variant.</p>
+      </div>
+      <p class="admin-bulk-import__hint">Import publishes active products to the live shop. It requires the latest product-colour migration and uses the stock quantity listed for each size/colour combination.</p>
+      <p class="admin-bulk-import__preview" id="bulkImportPreview" role="status" aria-live="polite"></p>
+      <label class="admin-bulk-import__confirm">
+        <input id="bulkImportConfirm" type="checkbox" disabled>
+        <span>I reviewed these products and confirm they may be added to the live shop.</span>
+      </label>
+      <button class="admin-form-button" id="bulkImportButton" type="button" disabled>Import products</button>
+      <p class="msg" id="bulkImportStatus" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+  <section class="admin-panel" aria-labelledby="productsHeading">
+    <div class="admin-panel__heading">
+      <div>
+        <h2 id="productsHeading">Products</h2>
+        <p>Catalog overview</p>
+      </div>
+      <span class="admin-panel__badge">Inventory</span>
+    </div>
+    <p id="status" role="status" aria-live="polite">Checking your access…</p>
+    <div class="table-wrap" id="content" hidden></div>
+  </section>
+</main>
+
+<script src="js/backend-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function () {
+  var config = window.ALEXO_BACKEND_CONFIG || {};
+  var status = document.getElementById("status");
+  var content = document.getElementById("content");
+
+  if (!window.supabase || !config.supabaseUrl || !config.supabaseAnonKey) {
+    status.textContent = "Supabase is not set up on this page.";
+    return;
+  }
+  var client = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
+
+  function esc(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function money(minor, currency) {
+    try {
+      return new Intl.NumberFormat("en-NG", { style: "currency", currency: currency || "NGN" }).format(minor / 100);
+    } catch (e) { return String(minor / 100); }
+  }
+
+  var colorHexes = {
+    "black": "#1a1a1a", "white": "#ffffff", "sky blue": "#87ceeb",
+    "blue": "#3b4a5a", "navy": "#1f2a44", "wine": "#722f37",
+    "khaki": "#c3b091", "grey": "#808080", "cream": "#efece6",
+    "olive": "#66714f", "charcoal": "#4a4a4a", "brown": "#7b4f2c",
+    "green": "#4f9d63", "pink": "#e893b8", "beige": "#c9bfa5",
+    "floral blue": "#4a6fd1", "floral pink": "#e893b8",
+    "burgundy": "#7a1f2b", "champagne": "#f7e7ce", "gold": "#d4af37",
+    "silver": "#c0c0c0", "tan": "#c19a6b"
+  };
+
+  function parseColors(value, separator) {
+    var names = String(value || "").split(separator).map(function (name) { return name.trim(); }).filter(Boolean);
+    var seen = [];
+    if (!names.length) throw new Error("Add at least one product colour.");
+    if (names.length > 10) throw new Error("A product can have up to 10 colours.");
+    return names.map(function (entry) {
+      var explicit = entry.match(/^(.+?)\s*:\s*(#[0-9a-f]{6})$/i);
+      var name = explicit ? explicit[1].trim() : entry;
+      var hex = explicit ? explicit[2] : colorHexes[name.toLowerCase()];
+      if (!hex) throw new Error('No swatch colour is set for "' + name + '". Use Name:#RRGGBB.');
+      if (seen.indexOf(name.toLowerCase()) !== -1) {
+        throw new Error("Product colours must not be repeated.");
+      }
+      seen.push(name.toLowerCase());
+      return { name: name, hex: hex };
+    });
+  }
+
+  function parseCsv(text) {
+    var records = [];
+    var record = [];
+    var field = "";
+    var quoted = false;
+    var input = String(text || "").replace(/^\uFEFF/, "");
+
+    for (var i = 0; i < input.length; i += 1) {
+      var character = input.charAt(i);
+      if (quoted) {
+        if (character === '"' && input.charAt(i + 1) === '"') {
+          field += '"';
+          i += 1;
+        } else if (character === '"') {
+          quoted = false;
+        } else {
+          field += character;
+        }
+      } else if (character === '"') {
+        quoted = true;
+      } else if (character === ",") {
+        record.push(field);
+        field = "";
+      } else if (character === "\n") {
+        record.push(field);
+        records.push(record);
+        record = [];
+        field = "";
+      } else if (character !== "\r") {
+        field += character;
+      }
+    }
+
+    if (quoted) throw new Error("The CSV contains an unclosed quoted field.");
+    if (field || record.length) {
+      record.push(field);
+      records.push(record);
+    }
+    if (!records.length) throw new Error("The CSV is empty.");
+
+    var headers = records.shift().map(function (header) { return header.trim().toLowerCase(); });
+    var requiredHeaders = [
+      "sku", "name", "category", "gender", "price_ngn", "sizes",
+      "colors", "stock_per_variant", "description", "image_url", "is_new", "is_active"
+    ];
+    requiredHeaders.forEach(function (header) {
+      if (headers.indexOf(header) === -1) throw new Error('The CSV is missing the "' + header + '" column.');
+    });
+
+    return records.filter(function (row) {
+      return row.some(function (cell) { return cell.trim() !== ""; });
+    }).map(function (row, index) {
+      if (row.length !== headers.length) {
+        throw new Error("CSV row " + (index + 2) + " has a different number of values than the header.");
+      }
+      var item = {};
+      headers.forEach(function (header, column) { item[header] = row[column].trim(); });
+      return item;
+    });
+  }
+
+  function prepareBulkProduct(row) {
+    var allowedCategories = ["Tops", "Dresses", "Outerwear", "Bottoms", "Co-ords", "Accessories"];
+    var sku = row.sku;
+    var name = row.name;
+    var gender = row.gender.toLowerCase();
+    var price = Number(row.price_ngn);
+    var stock = Number(row.stock_per_variant);
+    var sizes = row.sizes.split("|").map(function (size) { return size.trim(); }).filter(Boolean);
+    var colors = parseColors(row.colors, "|");
+    var imageUrl = row.image_url;
+
+    if (!sku || sku.length > 60 || !name || name.length > 200 ||
+      row.description.length > 2000 || allowedCategories.indexOf(row.category) === -1 ||
+      ["women", "men", "unisex"].indexOf(gender) === -1) {
+      throw new Error("Product identity, category, or gender is invalid.");
+    }
+    if (!Number.isFinite(price) || price <= 0 || !Number.isSafeInteger(Math.round(price * 100)) ||
+      !Number.isInteger(stock) || stock < 0 || stock > 999999999) {
+      throw new Error("Price or stock is invalid.");
+    }
+    if (!sizes.length || sizes.length > 50 || colors.length > 10 || sizes.length * colors.length > 100) {
+      throw new Error("Add valid sizes and no more than 100 size/colour combinations.");
+    }
+    if (sizes.some(function (size) {
+      return !size || size.length > 30 || /[\u0000-\u001f,]/.test(size) || !/[A-Za-z0-9]/.test(size);
+    })) {
+      throw new Error("One or more sizes are invalid.");
+    }
+    if (!/^https:\/\/[^/\s?#]+([/?#][^\s]*)?$/.test(imageUrl) || imageUrl.length > 2048) {
+      throw new Error("The image must be a valid HTTPS URL.");
+    }
+    if (row.is_new !== "true" && row.is_new !== "false") {
+      throw new Error("is_new must be true or false.");
+    }
+    if (row.is_active !== "true" && row.is_active !== "false") {
+      throw new Error("is_active must be true or false.");
+    }
+
+    return {
+      sku: sku,
+      payload: {
+        name: name,
+        sku: sku,
+        category: row.category,
+        gender: gender,
+        brand: "ALEXO",
+        description: row.description,
+        colors: colors,
+        priceMinor: String(Math.round(price * 100)),
+        stock: String(stock),
+        sizes: sizes,
+        imageUrl: imageUrl,
+        isNew: row.is_new,
+        isActive: row.is_active
+      }
+    };
+  }
+
+  function verifyProductColorMigration() {
+    return client.rpc("admin_create_product", { p: {
+      sku: "ALEXO-IMPORT-CHECK",
+      name: "ALEXO import check",
+      category: "Tops",
+      gender: "unisex",
+      description: "",
+      colors: [{ name: "Black", hex: "#1a1a1a" }],
+      priceMinor: "0",
+      stock: "0",
+      sizes: ["One Size"],
+      imageUrl: "",
+      isNew: "false",
+      isActive: "false"
+    } }).then(function (result) {
+      var errorMessage = result.error && result.error.message ? result.error.message : "";
+      if (errorMessage.indexOf("Invalid product price") !== -1) return;
+      throw new Error("The multi-colour product migration is not ready. Apply pending Supabase migrations before importing. " +
+        (errorMessage || "The database validation check returned unexpectedly."));
+    });
+  }
+
+  document.getElementById("signOut").addEventListener("click", function () {
+    client.auth.signOut().then(function () { location.replace("login.html"); });
+  });
+  
+
+  function render(products) {
+    if (!products.length) {
+      content.hidden = true;
+      status.textContent = "No products yet.";
+      return;
+    }
+    var rows = products.map(function (p) {
+      var variants = p.product_variants || [];
+      var prices = variants.map(function (v) { return v.unit_price_minor; });
+      var price = prices.length ? money(Math.min.apply(null, prices), variants[0].currency) : "—";
+      var stock = variants.length
+        ? variants.map(function (v) { return esc(v.size) + " " + esc(v.color) + ": <strong>" + esc(v.stock) + "</strong>"; }).join("<br>")
+        : '<span class="muted">No variants</span>';
+      var productId = esc(p.id);
+      var productName = esc(p.name);
+      var variantEditors = variants.map(function (v) {
+        var priceValue = Number(v.unit_price_minor) / 100;
+        var priceInputValue = Number.isFinite(priceValue) ? priceValue.toFixed(2) : "";
+        return '<div class="admin-variant-editor" data-variant-id="' + esc(v.id) + '">' +
+          '<p class="admin-variant-editor__name">' + esc(v.size) + " · " + esc(v.color) + "</p>" +
+          '<label class="admin-variant-field">Price (' + esc(v.currency || "NGN") + ')' +
+          '<input class="admin-variant-price" type="number" min="0.01" step="0.01" value="' + esc(priceInputValue) + '" required></label>' +
+          '<label class="admin-variant-field">Stock' +
+          '<input class="admin-variant-stock" type="number" min="0" step="1" value="' + esc(v.stock) + '" required></label>' +
+          "</div>";
+      }).join("");
+      return '<tr><td data-label="Product">' + productName + '<br><span class="muted">' + esc(p.sku) + "</span></td>" +
+        '<td data-label="Category">' + esc(p.category) + "</td>" +
+        '<td data-label="Status"><span class="tag ' + (p.is_active ? "on" : "") + '">' + (p.is_active ? "Live" : "Hidden") + "</span></td>" +
+        '<td data-label="Price">' + price + "</td>" +
+        '<td data-label="Stock">' + stock + "</td>" +
+        '<td data-label="Actions"><button type="button" class="admin-edit-toggle" data-edit-toggle="' + productId + '" data-product-name="' + productName + '" aria-expanded="false" aria-label="Edit ' + productName + '">Edit</button></td></tr>' +
+        '<tr class="admin-edit-row" data-edit-row="' + productId + '" hidden><td colspan="6">' +
+        '<div class="admin-product-editor" data-product-editor="' + productId + '">' +
+        '<div class="admin-product-editor__variants">' + (variantEditors || '<p class="muted">No variants available to edit.</p>') + "</div>" +
+        '<div class="admin-product-editor__footer">' +
+        '<label class="admin-visibility-toggle"><input class="admin-product-active" type="checkbox"' + (p.is_active ? " checked" : "") + '> <span>Show this product in the shop</span></label>' +
+        '<label class="admin-visibility-toggle"><input class="admin-product-featured" type="checkbox"' + (p.is_featured ? " checked" : "") + '> <span>Show on the home page (Featured)</span></label>' +
+        '<label class="admin-visibility-toggle"><input class="admin-product-new" type="checkbox"' + (p.is_new ? " checked" : "") + '> <span>Mark as a new arrival</span></label>' +
+        '<button type="button" class="admin-save-product" data-save-product="' + productId + '">Save changes</button>' +
+        '<button type="button" class="admin-delete-product" data-delete-product="' + productId + '" data-product-name="' + productName + '" aria-label="Permanently delete ' + productName + '">Delete permanently</button>' +
+        '<p class="admin-edit-message" role="status" aria-live="polite"></p></div></div></td></tr>';
+    }).join("");
+    content.innerHTML = '<table><thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Status</th><th scope="col">Price</th><th scope="col">Stock</th><th scope="col">Actions</th></tr></thead><tbody>' + rows + "</tbody></table>";
+    content.hidden = false;
+    status.textContent = "";
+  }
+
+  function loadProducts() {
+    return client.from("products")
+      .select("id, sku, name, category, is_active, is_featured, is_new, product_variants(id, sku, size, color, stock, unit_price_minor, currency)")
+      .order("created_at", { ascending: false })
+      .then(function (result) {
+        if (result.error) { throw result.error; }
+        render(result.data || []);
+      });
+  }
+
+  function saveProduct(button) {
+    var editor = button.closest(".admin-product-editor");
+    var message = editor.querySelector(".admin-edit-message");
+    var variantEditors = editor.querySelectorAll(".admin-variant-editor");
+    var variants = [];
+
+    function showMessage(text, kind) {
+      message.textContent = text;
+      message.className = "admin-edit-message " + (kind || "");
+    }
+
+    for (var i = 0; i < variantEditors.length; i += 1) {
+      var variantEditor = variantEditors[i];
+      var priceInput = variantEditor.querySelector(".admin-variant-price");
+      var stockInput = variantEditor.querySelector(".admin-variant-stock");
+      var price = Number(priceInput.value);
+      var priceMinor = Math.round(price * 100);
+      var stock = Number(stockInput.value);
+
+      if (!Number.isFinite(price) || price <= 0 ||
+          !Number.isSafeInteger(priceMinor) || Math.abs(price * 100 - priceMinor) > 1e-7) {
+        showMessage("Enter a valid price with no more than two decimal places.", "error");
+        priceInput.focus();
+        return;
+      }
+      if (stockInput.value.trim() === "" || !Number.isSafeInteger(stock) ||
+          stock < 0 || stock > 2147483647) {
+        showMessage("Enter a whole-number stock quantity between 0 and 2,147,483,647.", "error");
+        stockInput.focus();
+        return;
+      }
+      variants.push({
+        id: variantEditor.getAttribute("data-variant-id"),
+        priceMinor: priceMinor,
+        stock: stock
+      });
+    }
+
+    button.disabled = true;
+    showMessage("Saving changes…");
+    client.rpc("admin_update_product", {
+      p_product_id: button.getAttribute("data-save-product"),
+      p_is_active: editor.querySelector(".admin-product-active").checked,
+      p_is_featured: editor.querySelector(".admin-product-featured").checked,
+      p_is_new: editor.querySelector(".admin-product-new").checked,
+      p_variants: variants
+    }).then(function (result) {
+      if (result.error) { throw result.error; }
+      return loadProducts().then(function () {
+        status.textContent = "Product updated.";
+      });
+    }).catch(function (error) {
+      showMessage(error && error.message ? error.message : "Could not update this product.", "error");
+    }).then(function () {
+      button.disabled = false;
+    });
+  }
+
+  function getManagedImagePath(imageUrl) {
+    var storagePrefix = new URL(config.supabaseUrl).origin +
+      "/storage/v1/object/public/product-images/";
+    if (imageUrl.indexOf(storagePrefix) !== 0) { return ""; }
+
+    var path;
+    try {
+      path = decodeURIComponent(imageUrl.slice(storagePrefix.length).split(/[?#]/)[0]);
+    } catch (error) {
+      throw new Error("Could not identify an uploaded image for cleanup.");
+    }
+    return path.indexOf("admin-products/") === 0 ? path : "";
+  }
+
+  function deleteProduct(button) {
+    var productId = button.getAttribute("data-delete-product");
+    var productName = button.getAttribute("data-product-name") || "this product";
+    var editor = button.closest(".admin-product-editor");
+    var message = editor.querySelector(".admin-edit-message");
+    if (!window.confirm('Permanently delete "' + productName + '"? Its saved order history will remain.')) {
+      return;
+    }
+
+    var saveButton = editor.querySelector("[data-save-product]");
+    button.disabled = true;
+    if (saveButton) { saveButton.disabled = true; }
+    message.textContent = "Deleting product…";
+    message.className = "admin-edit-message";
+    var productDeleted = false;
+    var cleanupWarning = "";
+
+    client.rpc("admin_delete_product", { p_product_id: productId }).then(function (result) {
+      if (result.error) { throw result.error; }
+      productDeleted = true;
+
+      if (!Array.isArray(result.data)) {
+        cleanupWarning = "Image cleanup information was unavailable.";
+        return;
+      }
+
+      var paths = [];
+      try {
+        result.data.forEach(function (imageUrl) {
+          var path = getManagedImagePath(imageUrl);
+          if (path) { paths.push(path); }
+        });
+      } catch (error) {
+        cleanupWarning = error && error.message ? error.message : "Could not identify uploaded images for cleanup.";
+        return;
+      }
+      if (!paths.length) { return; }
+
+      return client.storage.from("product-images").remove(paths).then(function (cleanup) {
+        if (cleanup.error) {
+          cleanupWarning = "The product was deleted, but its uploaded image could not be removed: " + cleanup.error.message;
+        }
+      }, function (error) {
+        cleanupWarning = "The product was deleted, but its uploaded image could not be removed: " +
+          ((error && error.message) || error);
+      });
+    }).then(function () {
+      if (!productDeleted) { return; }
+      return loadProducts().then(function () {
+        status.textContent = cleanupWarning
+          ? "Product deleted. " + cleanupWarning
+          : "Product deleted.";
+      });
+    }).catch(function (error) {
+      if (productDeleted) {
+        status.textContent = "Product deleted, but the inventory could not refresh: " +
+          ((error && error.message) || error);
+        return;
+      }
+      message.textContent = error && error.message ? error.message : "Could not delete this product.";
+      message.className = "admin-edit-message error";
+    }).then(function () {
+      button.disabled = false;
+      if (saveButton) { saveButton.disabled = false; }
+    });
+  }
+
+  content.addEventListener("click", function (event) {
+    var target = event.target;
+    if (!target || typeof target.closest !== "function") { return; }
+
+    var toggle = target.closest("[data-edit-toggle]");
+    if (toggle && content.contains(toggle)) {
+      var productId = toggle.getAttribute("data-edit-toggle");
+      var rows = content.querySelectorAll("[data-edit-row]");
+      for (var i = 0; i < rows.length; i += 1) {
+        if (rows[i].getAttribute("data-edit-row") === productId) {
+          rows[i].hidden = !rows[i].hidden;
+          toggle.setAttribute("aria-expanded", String(!rows[i].hidden));
+          toggle.textContent = rows[i].hidden ? "Edit" : "Close";
+          toggle.setAttribute("aria-label", (rows[i].hidden ? "Edit " : "Close editor for ") + toggle.getAttribute("data-product-name"));
+          break;
+        }
+      }
+      return;
+    }
+
+    var saveButton = target.closest("[data-save-product]");
+    if (saveButton && content.contains(saveButton)) { saveProduct(saveButton); }
+    var deleteButton = target.closest("[data-delete-product]");
+    if (deleteButton && content.contains(deleteButton)) { deleteProduct(deleteButton); }
+  });
+
+  client.auth.getSession().then(function (result) {
+    if (!result.data.session) {
+      location.replace("login.html?next=admin.html");
+      return null;
+    }
+    document.getElementById("who").textContent = result.data.session.user.email;
+    return client.rpc("is_admin").then(function (check) {
+      if (check.error) { throw check.error; }
+      if (check.data !== true) {
+        status.textContent = "This account is not an admin.";
+        return null;
+      }
+      setupForm();
+      return loadProducts();
+    });
+  }).catch(function (error) {
+    status.textContent = "Something went wrong: " + (error && error.message ? error.message : error);
+  });
+  function setupForm() {
+    var panel = document.getElementById("productPanel");
+    var bulkPanel = document.getElementById("bulkImportPanel");
+    var form = document.getElementById("productForm");
+    var message = document.getElementById("formMessage");
+    var imageFileInput = document.getElementById("pImageFile");
+    var imageUrlInput = document.getElementById("pImage");
+    var imagePreview = document.getElementById("imagePreview");
+    var previewObjectUrl = null;
+    var imageExtensions = {
+      "image/jpeg": "jpg",
+      "image/png": "png",
+      "image/webp": "webp",
+      "image/avif": "avif"
+    };
+    var maxImageBytes = 10 * 1024 * 1024;
+    panel.hidden = false;
+    bulkPanel.hidden = false;
+
+    function say(text, kind) {
+      message.textContent = text;
+      message.className = "msg " + (kind || "");
+    }
+    function value(id) { return document.getElementById(id).value.trim(); }
+
+    function clearImagePreview() {
+      if (previewObjectUrl) {
+        window.URL.revokeObjectURL(previewObjectUrl);
+        previewObjectUrl = null;
+      }
+      imagePreview.removeAttribute("src");
+      imagePreview.hidden = true;
+    }
+
+    function imageProblem(file) {
+      if (!Object.prototype.hasOwnProperty.call(imageExtensions, file.type)) {
+        return "Choose a JPG, PNG, WebP, or AVIF image.";
+      }
+      if (file.size > maxImageBytes) {
+        return "Choose an image smaller than 10 MB.";
+      }
+      return "";
+    }
+
+    function uploadProductImage(file) {
+      var fileProblem = imageProblem(file);
+      if (fileProblem) { return Promise.reject(new Error(fileProblem)); }
+
+      var uniqueId = window.crypto && typeof window.crypto.randomUUID === "function"
+        ? window.crypto.randomUUID()
+        : Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+      var path = "admin-products/" + uniqueId + "." + imageExtensions[file.type];
+      var bucket = client.storage.from("product-images");
+
+      return bucket.upload(path, file, {
+        cacheControl: "3600",
+        contentType: file.type,
+        upsert: false
+      }).then(function (result) {
+        if (result.error) { throw result.error; }
+        return path;
+      });
+    }
+
+    imageFileInput.addEventListener("change", function () {
+      clearImagePreview();
+      var file = imageFileInput.files && imageFileInput.files[0];
+      if (!file) { return; }
+      var fileProblem = imageProblem(file);
+      if (fileProblem) {
+        imageFileInput.value = "";
+        say(fileProblem, "error");
+        return;
+      }
+      imageUrlInput.value = "";
+      try {
+        previewObjectUrl = window.URL.createObjectURL(file);
+        imagePreview.src = previewObjectUrl;
+        imagePreview.hidden = false;
+        say("");
+      } catch (error) {
+        imageFileInput.value = "";
+        say("Could not preview this image. Choose a different file.", "error");
+      }
+    });
+
+    imageUrlInput.addEventListener("input", function () {
+      if (!imageUrlInput.value.trim()) { return; }
+      imageFileInput.value = "";
+      clearImagePreview();
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var naira = parseFloat(value("pPrice"));
+      var sizes = value("pSizes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+      var colors;
+      if (!(naira > 0)) { say("Enter a valid price.", "error"); return; }
+      if (!sizes.length) { say("Add at least one size.", "error"); return; }
+      try {
+        colors = parseColors(value("pColor"), ",");
+      } catch (error) {
+        say(error.message, "error");
+        return;
+      }
+      var button = form.querySelector("button[type=submit]");
+      var selectedImage = imageFileInput.files && imageFileInput.files[0];
+      var imageUrl = value("pImage");
+      var productCreated = false;
+      var uploadedPath = "";
+      if (selectedImage) {
+        var fileProblem = imageProblem(selectedImage);
+        if (fileProblem) { say(fileProblem, "error"); return; }
+      } else if (imageUrl && imageUrl.indexOf("https://") !== 0) {
+        say("Image URLs must start with https://.", "error");
+        return;
+      }
+
+      button.disabled = true;
+      say("Saving…");
+      var imagePromise = Promise.resolve().then(function () {
+        if (!selectedImage) { return imageUrl; }
+        return uploadProductImage(selectedImage).then(function (path) {
+          uploadedPath = path;
+          var publicUrl = client.storage.from("product-images").getPublicUrl(path).data.publicUrl;
+          if (!publicUrl) { throw new Error("Could not create a public image URL."); }
+          return publicUrl;
+        });
+      });
+
+      imagePromise.then(function (imageUrl) {
+        return client.rpc("admin_create_product", { p: {
+          name: value("pName"),
+          sku: value("pSku"),
+          category: value("pCategory"),
+          gender: value("pGender"),
+          brand: "ALEXO",
+          description: value("pDesc"),
+          colors: colors,
+          priceMinor: String(Math.round(naira * 100)),
+          stock: value("pStock"),
+          sizes: sizes,
+          imageUrl: imageUrl,
+          isNew: String(document.getElementById("pNew").checked),
+          isActive: String(document.getElementById("pLive").checked)
+        } });
+      }).then(function (result) {
+        if (result.error) { throw result.error; }
+        productCreated = true;
+        form.reset();
+        clearImagePreview();
+        say("Product added.", "ok");
+        return loadProducts();
+      }).catch(function (error) {
+        var errorMessage = error && error.code === "23505"
+          ? "A product with this SKU already exists. Choose a different SKU."
+          : (error && error.message) || "Could not save the product.";
+
+        if (productCreated) {
+          say("Product was added, but the inventory could not refresh: " + errorMessage, "error");
+          return;
+        }
+        if (!uploadedPath) {
+          say(errorMessage, "error");
+          return;
+        }
+        return client.storage.from("product-images").remove([uploadedPath]).then(function (cleanup) {
+          say(cleanup.error
+            ? errorMessage + " The uploaded image could not be removed: " + cleanup.error.message
+            : errorMessage, "error");
+        }, function (cleanupError) {
+          say(errorMessage + " The uploaded image could not be removed: " +
+            ((cleanupError && cleanupError.message) || cleanupError), "error");
+        });
+      }).then(function () {
+        button.disabled = false;
+      });
+    });
+
+    var bulkFile = document.getElementById("bulkProductsFile");
+    var bulkPreview = document.getElementById("bulkImportPreview");
+    var bulkConfirm = document.getElementById("bulkImportConfirm");
+    var bulkButton = document.getElementById("bulkImportButton");
+    var bulkStatus = document.getElementById("bulkImportStatus");
+    var bulkProducts = [];
+
+    function syncBulkButton() {
+      bulkButton.disabled = !bulkProducts.length || !bulkConfirm.checked;
+    }
+
+    bulkConfirm.addEventListener("change", syncBulkButton);
+
+    bulkFile.addEventListener("change", function () {
+      bulkProducts = [];
+      bulkConfirm.checked = false;
+      bulkConfirm.disabled = true;
+      bulkStatus.textContent = "";
+      bulkPreview.className = "admin-bulk-import__preview";
+      bulkPreview.textContent = "";
+      syncBulkButton();
+
+      var file = bulkFile.files && bulkFile.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        bulkPreview.textContent = "Choose a CSV smaller than 2 MB.";
+        bulkPreview.classList.add("error");
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function () {
+        try {
+          var rows = parseCsv(reader.result);
+          if (!rows.length) throw new Error("The CSV has no product rows.");
+          if (rows.length > 100) throw new Error("Import no more than 100 products at a time.");
+
+          var errors = [];
+          var seenSkus = [];
+          rows.forEach(function (row, index) {
+            try {
+              var product = prepareBulkProduct(row);
+              if (seenSkus.indexOf(product.sku.toLowerCase()) !== -1) {
+                throw new Error("The SKU is repeated in this file.");
+              }
+              seenSkus.push(product.sku.toLowerCase());
+              bulkProducts.push(product);
+            } catch (error) {
+              errors.push("Row " + (index + 2) + " (" + (row.sku || row.name || "product") + "): " + error.message);
+            }
+          });
+
+          if (errors.length) {
+            bulkProducts = [];
+            bulkPreview.textContent = errors.slice(0, 5).join(" ") +
+              (errors.length > 5 ? " " + (errors.length - 5) + " more row errors." : "");
+            bulkPreview.classList.add("error");
+            return;
+          }
+
+          var variantCount = bulkProducts.reduce(function (count, product) {
+            return count + product.payload.sizes.length * product.payload.colors.length;
+          }, 0);
+          bulkPreview.textContent = bulkProducts.length + " products and " + variantCount +
+            " size/colour variants are ready. Each variant will use the CSV stock quantity.";
+          bulkConfirm.disabled = false;
+          syncBulkButton();
+        } catch (error) {
+          bulkPreview.textContent = error && error.message ? error.message : "Could not read this product CSV.";
+          bulkPreview.classList.add("error");
+        }
+      };
+      reader.onerror = function () {
+        bulkPreview.textContent = "Could not read this CSV file.";
+        bulkPreview.classList.add("error");
+      };
+      reader.readAsText(file);
+    });
+
+    bulkButton.addEventListener("click", function () {
+      if (!bulkProducts.length || !bulkConfirm.checked) return;
+
+      var products = bulkProducts.slice();
+      var imported = 0;
+      var failures = [];
+      var importStarted = false;
+      bulkFile.disabled = true;
+      bulkConfirm.disabled = true;
+      bulkButton.disabled = true;
+      bulkStatus.className = "msg";
+
+      bulkStatus.textContent = "Checking product database support…";
+      verifyProductColorMigration().then(function () {
+        importStarted = true;
+        var importQueue = Promise.resolve();
+        products.forEach(function (product, index) {
+          importQueue = importQueue.then(function () {
+            bulkStatus.textContent = "Adding " + (index + 1) + " of " + products.length + ": " + product.payload.name;
+            return client.rpc("admin_create_product", { p: product.payload }).then(function (result) {
+              if (result.error) throw result.error;
+              imported += 1;
+            }).catch(function (error) {
+              failures.push(product.sku + ": " + ((error && error.message) || error));
+            });
+          });
+        });
+        return importQueue;
+      }).then(function () {
+        return loadProducts().then(function () {
+          bulkStatus.textContent = failures.length
+            ? "Created " + imported + " of " + products.length + " products. Failed: " + failures.slice(0, 5).join("; ") +
+              (failures.length > 5 ? "; and " + (failures.length - 5) + " more." : "")
+            : "Created all " + imported + " products.";
+          bulkStatus.className = failures.length ? "msg error" : "msg ok";
+        });
+      }).catch(function (error) {
+        bulkStatus.textContent = importStarted
+          ? "Created " + imported + " products, but the inventory could not refresh: " + ((error && error.message) || error)
+          : "No products were added. " + ((error && error.message) || error);
+        bulkStatus.className = "msg error";
+      }).then(function () {
+        bulkFile.disabled = false;
+        bulkFile.value = "";
+        bulkConfirm.checked = false;
+        bulkConfirm.disabled = true;
+        bulkProducts = [];
+        syncBulkButton();
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

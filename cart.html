@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Shopping Bag — ALEXO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/cart.css">
+<link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/site-refresh.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ HEADER (same as homepage) ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo" aria-label="ALEXO home">ALEXO</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Search" data-action="open-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        </a>
+        <a href="account.html" class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.6-3.6 5-5.5 7.5-5.5s5.9 1.9 7.5 5.5"/></svg>
+        </a>
+        <a href="cart.html" class="icon-btn icon-btn--bag" aria-label="Bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="bag-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ CART HEADING ============ -->
+  <section class="cart-heading">
+    <h1 id="cartHeading">Your Shopping Bag</h1>
+    <p id="shippingProgress"></p>
+  </section>
+
+  <!-- ============ EMPTY STATE (hidden unless cart is empty) ============ -->
+  <section class="cart-empty" id="cartEmpty" hidden>
+    <p>Your bag is empty.</p>
+    <a href="shop.html" class="btn btn--dark"><span>Start Shopping</span></a>
+  </section>
+
+  <!-- ============ CART LAYOUT ============ -->
+  <section class="cart-layout" id="cartLayout">
+
+    <div class="cart-items">
+      <div class="cart-items__head">
+        <span>Product</span>
+        <span>Price</span>
+        <span>Total</span>
+      </div>
+
+      <div id="cartItemsList"></div>
+
+      <a href="shop.html" class="btn btn--outline cart-continue">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8H2M6 4L2 8l4 4"/></svg>
+        <span>Continue Shopping</span>
+      </a>
+    </div>
+
+    <aside class="order-summary">
+      <h2>Order Summary</h2>
+
+      <div class="order-summary__row">
+        <span id="subtotalLabel">Subtotal</span>
+        <span id="subtotalValue"></span>
+      </div>
+      <div class="order-summary__row">
+        <span>Shipping</span>
+        <span id="shippingValue"></span>
+      </div>
+      <div class="order-summary__row order-summary__row--discount" id="discountRow" hidden>
+        <span>Discount</span>
+        <span id="discountValue"></span>
+      </div>
+
+      <div class="order-summary__divider"></div>
+
+      <div class="order-summary__row order-summary__row--total">
+        <span>Estimated Total</span>
+        <span id="totalValue"></span>
+      </div>
+
+      <form class="promo-form" id="promoForm">
+        <input type="text" id="promoInput" placeholder="Enter promo code" aria-label="Promo code">
+        <button type="submit" class="btn btn--dark"><span>Apply</span></button>
+      </form>
+      <p class="promo-message" id="promoMessage"></p>
+
+      <button class="btn btn--dark btn--block" id="checkoutBtn">
+        <span>Proceed to Checkout</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      </button>
+
+      <div class="secure-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/></svg>
+        <div><strong>Checkout status</strong><span>Payments are unavailable during store setup</span></div>
+      </div>
+    </aside>
+
+  </section>
+
+  <!-- ============ YOU MAY ALSO LIKE ============ -->
+  <section class="best-collection">
+    <div class="best-collection__head pdp-related-head">
+      <h2>You May Also Like</h2>
+      <a href="shop.html" class="text-link">View All →</a>
+    </div>
+    <div class="product-grid" data-product-grid data-product-source="ALEXO_PRODUCTS" data-limit="4"></div>
+  </section>
+
+  <!-- ============ FOOTER (same as homepage) ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="index.html" class="logo">ALEXO</a>
+        <p>A modern fashion destination for those who love style, quality, and elegance.</p>
+        <div class="site-footer__social">
+          <a href="#" data-social="instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" data-social="facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg>
+          </a>
+          <a href="#" data-social="pinterest" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 18c1-3 1.5-6 2-9M12 12c2 1 4-1 4-3.2 0-2-1.7-3.3-4-3.3-2.6 0-4.5 1.9-4.5 4.1 0 1.2.6 2 1.3 2.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#" data-store-email>Contact Us</a></li>
+          <li><a href="orders.html">Track Order</a></li>
+          <li><a href="#" data-policy="shipping_policy_url">Shipping &amp; Delivery</a></li>
+          <li><a href="#" data-policy="returns_policy_url">Returns &amp; Exchanges</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col" data-dynamic-links>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#" data-policy="privacy_url">Privacy Policy</a></li>
+          <li><a href="#" data-policy="terms_url">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Contact</h3>
+        <address>
+          <span data-store-contact-placeholder>Contact details pending store setup</span>
+          <a href="#" data-store-email>Support contact pending</a>
+          <span data-store-country></span>
+        </address>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 ALEXO. All Rights Reserved.</span>
+      <div>
+        <a href="#" data-policy="privacy_url">Privacy</a>
+        <a href="#" data-policy="terms_url">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ALEXO Search Overlay -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <div class="search-overlay__inner">
+    <div class="search-overlay__top">
+      <div class="search-overlay__brand">ALEXO</div>
+      <button class="search-overlay__close" id="searchClose" type="button" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <form class="search-form" id="alexSearchForm" role="search">
+      <span class="search-form__label">Search ALEXO</span>
+      <input id="alexSearchInput" name="search" type="search" autocomplete="off" placeholder="What are you looking for?" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+
+    <section class="search-suggestions" aria-live="polite">
+      <div class="search-suggestions__heading">
+        <h2>Suggestions</h2>
+        <span id="searchSuggestionCount">Popular products</span>
+      </div>
+      <div class="search-suggestions__list" id="searchSuggestionsList"></div>
+    </section>
+
+    <section class="search-popular">
+      <p class="search-popular__title">Popular searches</p>
+      <div class="search-popular__list">
+        <button type="button" data-search-term="blazer">Blazers</button>
+        <button type="button" data-search-term="dress">Dresses</button>
+        <button type="button" data-search-term="shirt">Shirts</button>
+        <button type="button" data-search-term="shoes">Shoes</button>
+        <button type="button" data-search-term="bag">Bags</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="js/data-service.js"></script>
+<script src="js/products-data.js"></script>
+<script src="js/backend-config.js"></script>
+<script src="js/storefront-api.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+<script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — ALEXO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/checkout.css">
+<link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/site-refresh.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ HEADER (same as homepage) ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo" aria-label="ALEXO home">ALEXO</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Search" data-action="open-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        </a>
+        <a href="account.html" class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.6-3.6 5-5.5 7.5-5.5s5.9 1.9 7.5 5.5"/></svg>
+        </a>
+        <a href="cart.html" class="icon-btn icon-btn--bag" aria-label="Bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="bag-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ CHECKOUT HEADING + STEPPER ============ -->
+  <section class="checkout-heading">
+    <h1>Checkout</h1>
+    <ol class="checkout-stepper">
+      <li class="is-complete"><span class="checkout-stepper__dot">✓</span><span class="checkout-stepper__label">Cart</span></li>
+      <li class="is-active"><span class="checkout-stepper__dot">2</span><span class="checkout-stepper__label">Information</span></li>
+      <li><span class="checkout-stepper__dot">3</span><span class="checkout-stepper__label">Shipping</span></li>
+      <li><span class="checkout-stepper__dot">4</span><span class="checkout-stepper__label">Payment</span></li>
+    </ol>
+  </section>
+
+  <!-- ============ CHECKOUT LAYOUT ============ -->
+  <section class="checkout-layout">
+
+    <!-- Contact Information (always expanded) -->
+    <div class="checkout-section checkout-section--static" data-area="contact">
+      <h2>Contact Information</h2>
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+      </div>
+    </div>
+
+    <!-- Shipping Address (collapsible on mobile) -->
+    <div class="checkout-section" data-area="shipping">
+      <button class="checkout-section__head">
+        <h2>Shipping Address</h2>
+        <svg class="checkout-section__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>
+      </button>
+      <div class="checkout-section__body">
+        <div class="form-field">
+          <label for="country">Country / Region</label>
+          <input type="text" id="country" placeholder="Country or region" autocomplete="country-name" required>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" placeholder="First name" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" placeholder="Last name" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="address">Address</label>
+          <input type="text" id="address" placeholder="Street address" autocomplete="address-line1" required>
+        </div>
+        <div class="form-field">
+          <label for="address2">Apartment, suite, etc. (optional)</label>
+          <input type="text" id="address2">
+        </div>
+        <div class="form-row form-row--three">
+          <div class="form-field">
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="City" autocomplete="address-level2" required>
+          </div>
+          <div class="form-field">
+            <label for="state">State</label>
+            <input type="text" id="state" placeholder="State / region" autocomplete="address-level1">
+          </div>
+          <div class="form-field">
+            <label for="zip">ZIP Code</label>
+            <input type="text" id="zip" placeholder="Postal code" autocomplete="postal-code">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="Phone number" autocomplete="tel" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Method (collapsible on mobile) -->
+    <div class="checkout-section" data-area="delivery">
+      <button class="checkout-section__head">
+        <h2>Delivery Method</h2>
+        <svg class="checkout-section__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>
+      </button>
+      <div class="checkout-section__body">
+        <div class="delivery-options" id="deliveryOptions" aria-live="polite">
+          <p>Delivery options will appear when the store is configured.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Method (collapsible on mobile) -->
+    <div class="checkout-section" data-area="payment">
+      <button class="checkout-section__head">
+        <h2>Payment Method</h2>
+        <svg class="checkout-section__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>
+      </button>
+      <div class="checkout-section__body">
+
+        <div class="payment-option is-selected">
+          <span class="delivery-option__radio" aria-hidden="true"></span>
+          <span class="payment-option__label">Paystack hosted checkout (available after setup)</span>
+          <span class="payment-option__brands"><span>PAYSTACK</span></span>
+        </div>
+        <p>Payment is currently unavailable. Card details are not collected on this page.</p>
+
+        <p class="secure-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          Checkout will be available after the store completes payment setup.
+        </p>
+      </div>
+    </div>
+
+    <a href="cart.html" class="return-to-cart">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8H2M6 4L2 8l4 4"/></svg>
+      Return to Cart
+    </a>
+
+    <!-- Order Summary -->
+    <aside class="checkout-section is-open order-summary" data-area="summary">
+      <button class="checkout-section__head">
+        <h2>Order Summary <span id="summaryItemCount" class="order-summary__count"></span></h2>
+        <svg class="checkout-section__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>
+      </button>
+      <div class="checkout-section__body">
+
+        <div id="summaryItems"></div>
+
+        <div class="order-summary__row">
+          <span>Subtotal</span>
+          <span id="summarySubtotal"></span>
+        </div>
+        <div class="order-summary__row">
+          <span>Shipping</span>
+          <span id="summaryShipping"></span>
+        </div>
+        <div class="order-summary__divider"></div>
+
+        <div class="order-summary__row order-summary__row--total">
+          <span>Total</span>
+          <span id="summaryTotal"></span>
+        </div>
+
+        <p class="promo-message" id="checkoutMessage" role="status" aria-live="polite"></p>
+
+        <button class="btn btn--dark btn--block" id="placeOrderBtn">
+          <span>Continue to Paystack</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        </button>
+
+        <div class="secure-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/></svg>
+          <div><strong>Checkout status</strong><span>Payments are unavailable during store setup</span></div>
+        </div>
+      </div>
+    </aside>
+
+  </section>
+
+  <!-- ============ ORDER CONFIRMATION (shown only after verified payment) ============ -->
+  <section class="order-confirmation" id="orderConfirmation" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+    <h2>Payment confirmed</h2>
+    <p id="orderConfirmationMessage">Your payment has been verified.</p>
+    <a href="index.html" class="btn btn--dark"><span>Back to Home</span></a>
+  </section>
+
+  <!-- ============ PERKS BAR ============ -->
+  <section class="pdp-perks-bar">
+    <ul class="newsletter__perks">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h13v9H3z"/><path d="M16 10h3l2 3v3h-5z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+        <div><strong>Delivery details</strong><span>Shown when checkout is available</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.9-3.4M4 14a8 8 0 0 0 14.9 3.4"/></svg>
+        <div><strong>Returns</strong><span>Policy details will be published before launch</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <div><strong>Payment</strong><span>Checkout setup is in progress</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3z"/><path d="M3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+        <div><strong>Customer support</strong><span>Contact details will be published before launch</span></div>
+      </li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- ALEXO Search Overlay -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <div class="search-overlay__inner">
+    <div class="search-overlay__top">
+      <div class="search-overlay__brand">ALEXO</div>
+      <button class="search-overlay__close" id="searchClose" type="button" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <form class="search-form" id="alexSearchForm" role="search">
+      <span class="search-form__label">Search ALEXO</span>
+      <input id="alexSearchInput" name="search" type="search" autocomplete="off" placeholder="What are you looking for?" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+
+    <section class="search-suggestions" aria-live="polite">
+      <div class="search-suggestions__heading">
+        <h2>Suggestions</h2>
+        <span id="searchSuggestionCount">Popular products</span>
+      </div>
+      <div class="search-suggestions__list" id="searchSuggestionsList"></div>
+    </section>
+
+    <section class="search-popular">
+      <p class="search-popular__title">Popular searches</p>
+      <div class="search-popular__list">
+        <button type="button" data-search-term="blazer">Blazers</button>
+        <button type="button" data-search-term="dress">Dresses</button>
+        <button type="button" data-search-term="shirt">Shirts</button>
+        <button type="button" data-search-term="shoes">Shoes</button>
+        <button type="button" data-search-term="bag">Bags</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="js/data-service.js"></script>
+<script src="js/products-data.js"></script>
+<script src="js/backend-config.js"></script>
+<script src="js/storefront-api.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

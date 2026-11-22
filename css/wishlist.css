@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Wishlist heading
+   ========================================================================== */
+
+.wishlist-heading {
+  padding: var(--space-3) 0 var(--space-4);
+}
+.wishlist-heading h1 {
+  font-size: clamp(24px, 2.6vw, 30px);
+  margin-bottom: 6px;
+}
+.wishlist-heading p {
+  font-size: 13.5px;
+  color: var(--color-ink-soft);
+}
+
+/* ==========================================================================
+   Empty state
+   ========================================================================== */
+
+.wishlist-empty {
+  padding: var(--space-7) 0;
+  text-align: center;
+}
+.wishlist-empty svg {
+  width: 48px;
+  height: 48px;
+  color: var(--color-ink-soft);
+  margin: 0 auto var(--space-3);
+}
+.wishlist-empty h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+.wishlist-empty p {
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-4);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Wishlist layout
+   ========================================================================== */
+
+.wishlist-layout {
+  padding-bottom: var(--space-7);
+}
+
+.wishlist-grid {
+  margin-bottom: var(--space-5);
+}
+
+.wishlist-continue {
+  margin: 0 auto;
+  justify-content: center;
+  width: fit-content;
+}
+
+/* ==========================================================================
+   Wishlist card — extends the shared .product-card component.
+   Same image treatment, heart, hover-zoom and swatches as Shop/Best
+   Collection; only the body layout changes to fit the extra info a saved
+   item needs (color name, availability, Add to Bag, Remove).
+   ========================================================================== */
+
+.product-card--wishlist .product-card__body {
+  display: block;
+}
+
+.product-card__color-label {
+  font-size: 12.5px;
+  color: var(--color-ink-soft);
+  margin: 0 0 6px;
+}
+
+.product-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.product-card__price-was {
+  font-size: 12.5px;
+  color: var(--color-ink-soft);
+  text-decoration: line-through;
+}
+
+.product-card--wishlist .product-card__swatches {
+  margin-bottom: 8px;
+}
+
+.product-card__availability {
+  font-size: 12px;
+  margin: 0 0 var(--space-3);
+}
+.product-card__availability span {
+  color: var(--color-ink-soft);
+}
+.product-card__availability .in-stock {
+  color: #1a7a3c;
+  font-weight: 500;
+}
+.product-card__availability .out-of-stock {
+  color: #b23b3b;
+  font-weight: 500;
+}
+
+.product-card--wishlist .btn--block {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.product-card__remove {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 160ms ease;
+}
+.product-card__remove:hover { color: var(--color-ink); }
+
+/* ==========================================================================
+   Removal + heart feedback animation
+   ========================================================================== */
+
+.product-card--wishlist.is-removing {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+@keyframes wishlist-heart-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.product-card__wishlist:active svg {
+  animation: wishlist-heart-pop 260ms ease;
+}

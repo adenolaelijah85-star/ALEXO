@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — ALEXO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/account.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/site-refresh.css">
+</head>
+<body class="account-page">
+
+<div class="page">
+
+  <!-- ============ HEADER (same as homepage) ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo" aria-label="ALEXO home">ALEXO</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Search" data-action="open-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+          <span class="wishlist-count">0</span>
+        </a>
+        <a href="account.html" class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.6-3.6 5-5.5 7.5-5.5s5.9 1.9 7.5 5.5"/></svg>
+        </a>
+        <a href="cart.html" class="icon-btn icon-btn--bag" aria-label="Bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="bag-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ ACCOUNT LAYOUT ============ -->
+  <p class="account-loading" id="accountStatus" role="status" aria-live="polite">Checking your sign-in…</p>
+  <section class="account-layout" id="accountLayout" hidden>
+
+    <!-- Sidebar -->
+    <aside class="account-sidebar">
+      <div class="account-sidebar__profile">
+        <img id="sidebarAvatar" class="account-sidebar__avatar" src="" alt="">
+        <div>
+          <p class="account-sidebar__greeting">Hello, <span id="sidebarFirstName"></span> <span aria-hidden="true">👋</span></p>
+          <p class="account-sidebar__email" id="sidebarEmail"></p>
+        </div>
+      </div>
+
+      <nav class="account-nav" aria-label="Account sections">
+        <button class="account-nav__item is-active" data-panel="dashboard">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="6.5" height="6.5" rx="1.2"/><rect x="11" y="2.5" width="6.5" height="6.5" rx="1.2"/><rect x="2.5" y="11" width="6.5" height="6.5" rx="1.2"/><rect x="11" y="11" width="6.5" height="6.5" rx="1.2"/></svg>
+          Dashboard
+        </button>
+        <button class="account-nav__item" data-panel="orders">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h12M4 10h12M4 14h8"/></svg>
+          My Orders
+        </button>
+        <button class="account-nav__item" data-panel="addresses">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 18s6-5.2 6-10a6 6 0 0 0-12 0c0 4.8 6 10 6 10z"/><circle cx="10" cy="8" r="2"/></svg>
+          Addresses
+        </button>
+        <a class="account-nav__item" href="wishlist.html">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 17s-6-3.6-7.9-7.1C.9 7 1.9 4 4.8 4c1.7 0 2.8.8 3.8 2 1-1.2 2.1-2 3.8-2 2.9 0 3.9 3 2.7 5.9C16 13.4 10 17 10 17z"/></svg>
+          Wishlist
+        </a>
+        <button class="account-nav__item" data-panel="settings">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="2.6"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4M15.3 15.3l-1.4-1.4M6.1 6.1 4.7 4.7"/></svg>
+          Settings
+        </button>
+        <button class="account-nav__item account-nav__item--logout" id="logoutBtn">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7.5 17.5H4a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1h3.5"/><path d="M13.5 14l4-4-4-4M17 10H7.5"/></svg>
+          Logout
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Mobile select (compact section switcher) -->
+    <select class="account-nav-mobile" id="accountNavMobile" aria-label="Account sections">
+      <option value="dashboard">Dashboard</option>
+      <option value="orders">My Orders</option>
+      <option value="addresses">Addresses</option>
+      <option value="settings">Settings</option>
+    </select>
+
+    <!-- Main column: panels + (Dashboard-only) promo aside -->
+    <div class="account-main">
+
+      <div class="account-panels">
+
+        <!-- ============ DASHBOARD ============ -->
+        <div class="account-panel is-active" data-panel="dashboard">
+          <h1>My Account</h1>
+          <p class="account-panel__intro">Your profile and saved addresses are securely stored with your account.</p>
+
+          <div class="profile-card">
+            <img id="profileCardAvatar" class="profile-card__avatar" src="" alt="">
+            <div class="profile-card__info">
+              <h2 id="profileCardName"></h2>
+              <p id="profileCardEmail"></p>
+              <p id="profileCardPhone"></p>
+              <button class="text-link profile-card__change-photo" id="changePhotoBtn">Change Photo</button>
+            </div>
+            <button class="btn btn--outline profile-card__edit" data-panel-link="settings">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 2l3 3-8 8-3.5.5.5-3.5 8-8z"/></svg>
+              <span>Edit Profile</span>
+            </button>
+          </div>
+
+          <div class="account-stats">
+            <div class="account-stat">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="14" height="11" rx="1.5"/><path d="M7 6V4.5a3 3 0 0 1 6 0V6"/></svg>
+              <div><strong id="statOrders">0</strong><span>Total Orders</span></div>
+            </div>
+            <div class="account-stat">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 17s-6-3.6-7.9-7.1C.9 7 1.9 4 4.8 4c1.7 0 2.8.8 3.8 2 1-1.2 2.1-2 3.8-2 2.9 0 3.9 3 2.7 5.9C16 13.4 10 17 10 17z"/></svg>
+              <div><strong id="statWishlist">0</strong><span>Wishlist</span></div>
+            </div>
+            <div class="account-stat">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 18s6-5.2 6-10a6 6 0 0 0-12 0c0 4.8 6 10 6 10z"/><circle cx="10" cy="8" r="2"/></svg>
+              <div><strong id="statAddresses">0</strong><span>Addresses</span></div>
+            </div>
+            <div class="account-stat">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><path d="M2.5 8.5h15"/></svg>
+              <div><strong id="statCredit">₦0.00</strong><span>Account Credit</span></div>
+            </div>
+          </div>
+
+          <div class="account-section-head">
+            <h3>Recent Orders</h3>
+            <button class="text-link" data-panel-link="orders">View All Orders →</button>
+          </div>
+          <div class="recent-orders" id="recentOrders"></div>
+        </div>
+
+        <!-- ============ MY ORDERS ============ -->
+        <div class="account-panel" data-panel="orders">
+          <h1>My Orders</h1>
+          <p class="account-panel__intro">Order history will be available when orders are linked to customer accounts.</p>
+
+          <div class="order-filter-tabs" id="orderFilterTabs">
+            <button class="is-active" data-filter="all">All Orders</button>
+            <button data-filter="Processing">Processing</button>
+            <button data-filter="Shipped">Shipped</button>
+            <button data-filter="Delivered">Delivered</button>
+            <button data-filter="Cancelled">Cancelled</button>
+          </div>
+
+          <div class="orders-table" id="ordersTable"></div>
+          <p class="orders-pagination" id="ordersPagination"></p>
+        </div>
+
+        <!-- ============ ORDER DETAIL ============ -->
+        <div class="account-panel" data-panel="orderDetail">
+          <button class="back-link" data-panel-link="orders">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
+            Back to Orders
+          </button>
+
+          <div class="order-detail-head">
+            <div>
+              <h1 id="orderDetailId"></h1>
+              <p id="orderDetailMeta"></p>
+            </div>
+            <span class="status-badge" id="orderDetailStatus"></span>
+          </div>
+
+          <div class="order-detail-layout">
+            <div class="order-detail-main">
+
+              <div class="order-detail-tracker" id="orderDetailTracker"></div>
+
+              <h3 class="account-subheading">Items in this Order</h3>
+              <div id="orderDetailItems"></div>
+
+              <div class="need-help">
+                <h3>Need Help?</h3>
+                <p>If you have any questions about your order, our support team is here to help.</p>
+                <div class="need-help__actions">
+                  <button class="btn btn--dark"><span>Contact Support</span></button>
+                  <button class="btn btn--outline"><span>Track with Email</span></button>
+                </div>
+              </div>
+
+            </div>
+
+            <aside class="order-detail-side">
+              <div class="order-detail-card">
+                <h3>Order Summary</h3>
+                <div id="orderSummaryRows"></div>
+              </div>
+
+              <div class="order-detail-card">
+                <div class="order-detail-card__head">
+                  <h3>Shipping Address</h3>
+                  <button class="text-link" data-panel-link="addresses">Change</button>
+                </div>
+                <p id="orderShippingAddress"></p>
+              </div>
+
+              <div class="order-detail-card">
+                <h3>Payment Method</h3>
+                <p id="orderPaymentStatus"></p>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ============ ADDRESSES ============ -->
+        <div class="account-panel" data-panel="addresses">
+          <h1>Saved Addresses</h1>
+          <p class="account-panel__intro">Your saved addresses are private to your account.</p>
+
+          <div id="addressesList"></div>
+
+          <button class="btn btn--outline" id="addAddressBtn">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg>
+            <span>Add New Address</span>
+          </button>
+
+          <form class="account-form" id="addressForm" hidden>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="addrLabel">Address Label</label>
+                <input type="text" id="addrLabel" placeholder="e.g. Home, Work">
+              </div>
+              <div class="form-field">
+                <label for="addrCountry">Country</label>
+                <select id="addrCountry">
+                  <option>Nigeria</option>
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>United Kingdom</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="addrFirstName">First name</label>
+                <input type="text" id="addrFirstName">
+              </div>
+              <div class="form-field">
+                <label for="addrLastName">Last name</label>
+                <input type="text" id="addrLastName">
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="addrStreet">Address</label>
+              <input type="text" id="addrStreet" placeholder="Street address">
+            </div>
+            <div class="form-row form-row--three">
+              <div class="form-field">
+                <label for="addrCity">City</label>
+                <input type="text" id="addrCity">
+              </div>
+              <div class="form-field">
+                <label for="addrState">State</label>
+                <input type="text" id="addrState">
+              </div>
+              <div class="form-field">
+                <label for="addrZip">ZIP / Postal Code</label>
+                <input type="text" id="addrZip">
+              </div>
+            </div>
+            <div class="account-form__actions">
+              <button type="submit" class="btn btn--dark"><span>Save Address</span></button>
+              <button type="button" class="btn btn--outline" id="cancelAddressBtn"><span>Cancel</span></button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ============ SETTINGS (Profile + Password) ============ -->
+        <div class="account-panel" data-panel="settings">
+          <h1>Settings</h1>
+          <p class="account-panel__intro">Update the profile details saved to your account.</p>
+
+          <h3 class="account-subheading">Profile Information</h3>
+          <form class="account-form" id="profileForm">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="profFirstName">First name</label>
+                <input type="text" id="profFirstName">
+              </div>
+              <div class="form-field">
+                <label for="profLastName">Last name</label>
+                <input type="text" id="profLastName">
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="profEmail">Email address</label>
+              <input type="email" id="profEmail" readonly aria-describedby="emailAccountNote">
+              <small id="emailAccountNote">To change your email, contact store support.</small>
+            </div>
+            <div class="form-field">
+              <label for="profPhone">Phone</label>
+              <input type="tel" id="profPhone">
+            </div>
+            <div class="account-form__actions">
+              <button type="submit" class="btn btn--dark"><span>Save Changes</span></button>
+            </div>
+          </form>
+          <p class="account-form__message" id="profileMessage"></p>
+
+          <h3 class="account-subheading">Change Password</h3>
+          <form class="account-form" id="passwordForm">
+            <div class="form-field">
+              <label for="newPassword">New password</label>
+              <input type="password" id="newPassword" autocomplete="new-password" minlength="8" required>
+            </div>
+            <div class="form-field">
+              <label for="confirmPassword">Confirm new password</label>
+              <input type="password" id="confirmPassword" autocomplete="new-password" minlength="8" required>
+            </div>
+            <div class="account-form__actions">
+              <button type="submit" class="btn btn--dark"><span>Update Password</span></button>
+            </div>
+          </form>
+          <p class="account-form__message" id="passwordMessage"></p>
+          <p class="account-form__note">Your password is managed securely by Supabase Authentication.</p>
+        </div>
+
+      </div>
+
+      <!-- Promo aside — Dashboard only -->
+      <aside class="account-promo" id="accountPromo">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=80&auto=format&fit=crop" alt="Model in tailored fashion">
+        <div class="account-promo__copy">
+          <h2>Style Your<br>Story</h2>
+          <p>Explore the ALEXO preview catalog.</p>
+          <a href="shop.html" class="btn btn--dark"><span>Explore Collection</span></a>
+        </div>
+      </aside>
+
+    </div>
+
+  </section>
+
+  <!-- ============ FOOTER (same as homepage) ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="index.html" class="logo">ALEXO</a>
+        <p>A modern fashion destination for those who love style, quality, and elegance.</p>
+        <div class="site-footer__social">
+          <a href="#" data-social="instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" data-social="facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg>
+          </a>
+          <a href="#" data-social="pinterest" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 18c1-3 1.5-6 2-9M12 12c2 1 4-1 4-3.2 0-2-1.7-3.3-4-3.3-2.6 0-4.5 1.9-4.5 4.1 0 1.2.6 2 1.3 2.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#" data-store-email>Contact Us</a></li>
+          <li><a href="orders.html">Track Order</a></li>
+          <li><a href="#" data-policy="shipping_policy_url">Shipping &amp; Delivery</a></li>
+          <li><a href="#" data-policy="returns_policy_url">Returns &amp; Exchanges</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col" data-dynamic-links>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#" data-policy="privacy_url">Privacy Policy</a></li>
+          <li><a href="#" data-policy="terms_url">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Contact</h3>
+        <address>
+          <span data-store-contact-placeholder>Contact details pending store setup</span>
+          <a href="#" data-store-email>Support contact pending</a>
+          <span data-store-country></span>
+        </address>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 ALEXO. All Rights Reserved.</span>
+      <div>
+        <a href="#" data-policy="privacy_url">Privacy</a>
+        <a href="#" data-policy="terms_url">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/data-service.js"></script>
+<script src="js/products-data.js"></script>
+<script src="js/backend-config.js"></script>
+<script src="js/storefront-api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+<script src="js/account.js"></script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oversized Blazer — ALEXO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/product.css">
+<link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/site-refresh.css">
+</head>
+<body>
+
+<aside class="announcement-bar" aria-label="Store announcement">
+  <p><strong>THE ALEXO EDIT</strong> — Effortless style, your way.</p>
+  <a href="shop.html">Explore the collection <span aria-hidden="true">→</span></a>
+</aside>
+
+<div class="page">
+
+  <!-- ============ HEADER (same as homepage) ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo" aria-label="ALEXO home">ALEXO</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Search" data-action="open-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        </a>
+        <a href="account.html" class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.6-3.6 5-5.5 7.5-5.5s5.9 1.9 7.5 5.5"/></svg>
+        </a>
+        <a href="cart.html" class="icon-btn icon-btn--bag" aria-label="Bag, empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="bag-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ BREADCRUMB ============ -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a>
+    <span>/</span>
+    <a href="shop.html?category=women">Women</a>
+    <span>/</span>
+    <a href="shop.html?category=women&subcategory=clothing">Clothing</a>
+    <span>/</span>
+    <span aria-current="page" id="breadcrumbProduct">Oversized Blazer</span>
+  </nav>
+
+  <!-- ============ PRODUCT MAIN ============ -->
+  <section class="product-detail">
+
+    <!-- Gallery -->
+    <div class="product-gallery">
+      <div class="product-gallery__main">
+        <button class="gallery-nav gallery-nav--prev" id="galleryPrev" aria-label="Previous image">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L5 8l5 5"/></svg>
+        </button>
+        <img id="galleryMainImage" src="" alt="Oversized Blazer">
+        <button class="gallery-nav gallery-nav--next" id="galleryNext" aria-label="Next image">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+        <button class="gallery-wishlist" id="galleryWishlistBtn" aria-label="Add to wishlist" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        </button>
+        <div class="gallery-dots" id="galleryDots"></div>
+      </div>
+      <div class="product-gallery__thumbs" id="galleryThumbs"></div>
+    </div>
+
+    <!-- Info -->
+    <div class="product-info">
+      <h1 id="productName">Oversized Blazer</h1>
+
+      <div class="product-info__rating">
+        <span class="stars" id="productStars" aria-hidden="true"></span>
+        <a href="#reviews" class="rating-count" id="reviewCountLink"></a>
+      </div>
+
+      <p class="product-info__price" id="productPrice"></p>
+      <p class="installment-line">
+        or 4 interest-free payments of <span id="installmentAmount"></span> with
+        <span class="badge-afterpay">afterpay⚡</span>
+      </p>
+
+      <p class="product-info__desc" id="productDesc"></p>
+
+      <!-- Colors -->
+      <div class="option-group">
+        <p class="option-group__label">Color: <strong id="selectedColorLabel"></strong></p>
+        <div class="color-select" id="colorSelect"></div>
+      </div>
+
+      <!-- Sizes -->
+      <div class="option-group">
+        <p class="option-group__label">Size: <strong id="selectedSizeLabel"></strong></p>
+        <div class="size-select" id="sizeSelect"></div>
+        <button class="size-guide-link" id="openSizeGuide">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="6" width="14" height="7" rx="1"/><path d="M5 6v2M8 6v3M11 6v2"/></svg>
+          Size Guide
+        </button>
+      </div>
+
+      <!-- Quantity -->
+      <div class="option-group">
+        <p class="option-group__label">Quantity</p>
+        <div class="quantity-stepper">
+          <button id="qtyMinus" aria-label="Decrease quantity">−</button>
+          <span id="qtyValue">1</span>
+          <button id="qtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <button class="btn btn--dark btn--block" id="addToBagBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span>Add to Bag</span>
+      </button>
+      <button class="btn btn--outline btn--block" id="wishlistBtn" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.35-9.5-8.5C.7 8.1 2.3 4.5 6 4.5c2 0 3.3 1 4.5 2.5 1.2-1.5 2.5-2.5 4.5-2.5 3.7 0 5.3 3.6 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        <span>Add to Wishlist</span>
+      </button>
+
+      <ul class="perks-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h13v9H3z"/><path d="M16 10h3l2 3v3h-5z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+          <div><strong>Delivery details</strong><span>Shown when checkout is available</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.9-3.4M4 14a8 8 0 0 0 14.9 3.4"/></svg>
+          <div><strong>Returns</strong><span>Policy details will be published before launch</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <div><strong>Payment</strong><span>Checkout setup is in progress</span></div>
+        </li>
+      </ul>
+
+    </div>
+
+  </section>
+
+  <section class="campaign-banner campaign-banner--product" aria-labelledby="productCampaignTitle">
+    <div class="campaign-banner__copy">
+      <p class="campaign-banner__eyebrow">THE ALEXO EDIT</p>
+      <h2 id="productCampaignTitle">Find your next favorite.</h2>
+      <p>Explore refined pieces for everyday wear.</p>
+      <a href="shop.html" class="btn btn--dark">Explore the collection</a>
+    </div>
+    <div class="campaign-banner__image">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000&q=80&auto=format&fit=crop" alt="" aria-hidden="true" loading="eager">
+    </div>
+  </section>
+
+  <!-- ============ TABS: Product Details / Size & Fit / Shipping & Returns ============ -->
+  <!-- Tabs on desktop, accordion on mobile (same markup, behaviour switches by breakpoint) -->
+  <section class="pdp-tabs" id="pdpTabs">
+    <div class="pdp-tabs__nav">
+      <button class="pdp-tabs__btn is-active" data-tab="details">
+        <span>Product Details</span>
+        <svg class="pdp-tabs__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <button class="pdp-tabs__btn" data-tab="fit">
+        <span>Size &amp; Fit</span>
+        <svg class="pdp-tabs__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <button class="pdp-tabs__btn" data-tab="shipping">
+        <span>Shipping &amp; Returns</span>
+        <svg class="pdp-tabs__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+    </div>
+
+    <div class="pdp-tabs__panel is-active" data-panel="details">
+      <p>This oversized blazer is made from a high-quality fabric blend for a soft yet structured feel. It features a relaxed fit, notched lapels, and functional pockets. Style it with trousers, denim, or a dress for a polished look.</p>
+      <ul id="productDetailsList"></ul>
+      <p id="fabricNote"></p>
+      <p id="careNote"></p>
+      <p id="originNote"></p>
+    </div>
+
+    <div class="pdp-tabs__panel" data-panel="fit">
+      <p>This piece is designed with a relaxed, oversized fit — if you prefer a closer fit, we recommend sizing down. Refer to the Size Guide for full measurements.</p>
+    </div>
+
+    <div class="pdp-tabs__panel" data-panel="shipping">
+      <p>Free standard shipping on orders over ₦100. Delivered in 3–6 business days. Returns accepted within 30 days in original condition — see our Returns &amp; Exchanges policy for details.</p>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="pdp-reviews" id="reviews">
+    <div class="discover-row__head">
+      <h2>Customer Reviews</h2>
+    </div>
+    <div class="pdp-reviews__grid" id="pdpReviewsGrid"></div>
+  </section>
+
+  <!-- ============ RELATED PRODUCTS ============ -->
+  <section class="best-collection">
+    <div class="best-collection__head pdp-related-head">
+      <h2>You Might Also Like</h2>
+      <a href="shop.html" class="text-link">View All →</a>
+    </div>
+    <div class="product-grid" data-product-grid data-product-source="ALEXO_PRODUCTS" data-limit="4"></div>
+  </section>
+
+  <!-- ============ PERKS BAR ============ -->
+  <section class="pdp-perks-bar">
+    <ul class="newsletter__perks">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h13v9H3z"/><path d="M16 10h3l2 3v3h-5z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+        <div><strong>Delivery details</strong><span>Shown when checkout is available</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.9-3.4M4 14a8 8 0 0 0 14.9 3.4"/></svg>
+        <div><strong>Returns</strong><span>Policy details will be published before launch</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <div><strong>Payment</strong><span>Checkout setup is in progress</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3z"/><path d="M3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+        <div><strong>Customer support</strong><span>Contact details will be published before launch</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER (same as homepage) ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="index.html" class="logo">ALEXO</a>
+        <p>A modern fashion destination for those who love style, quality, and elegance.</p>
+        <div class="site-footer__social">
+          <a href="#" data-social="instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" data-social="facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg>
+          </a>
+          <a href="#" data-social="pinterest" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 18c1-3 1.5-6 2-9M12 12c2 1 4-1 4-3.2 0-2-1.7-3.3-4-3.3-2.6 0-4.5 1.9-4.5 4.1 0 1.2.6 2 1.3 2.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          <li><a href="shop.html?category=women">Women</a></li>
+          <li><a href="shop.html?category=men">Men</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="shop.html?filter=sale">Sale</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#" data-store-email>Contact Us</a></li>
+          <li><a href="orders.html">Track Order</a></li>
+          <li><a href="#" data-policy="shipping_policy_url">Shipping &amp; Delivery</a></li>
+          <li><a href="#" data-policy="returns_policy_url">Returns &amp; Exchanges</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col" data-dynamic-links>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#" data-policy="privacy_url">Privacy Policy</a></li>
+          <li><a href="#" data-policy="terms_url">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h3>Contact</h3>
+        <address>
+          <span data-store-contact-placeholder>Contact details pending store setup</span>
+          <a href="#" data-store-email>Support contact pending</a>
+          <span data-store-country></span>
+        </address>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 ALEXO. All Rights Reserved.</span>
+      <div>
+        <a href="#" data-policy="privacy_url">Privacy</a>
+        <a href="#" data-policy="terms_url">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============ SIZE GUIDE MODAL ============ -->
+<div class="modal-backdrop" id="sizeGuideBackdrop"></div>
+<div class="modal" id="sizeGuideModal" role="dialog" aria-modal="true" aria-label="Size guide">
+  <div class="modal__header">
+    <h2>Size Guide</h2>
+    <button class="filter-panel__close" id="closeSizeGuide" aria-label="Close size guide">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <table class="size-guide-table">
+    <thead>
+      <tr><th>Size</th><th>Bust (in)</th><th>Waist (in)</th><th>Hip (in)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>XS</td><td>32</td><td>25</td><td>35</td></tr>
+      <tr><td>S</td><td>34</td><td>27</td><td>37</td></tr>
+      <tr><td>M</td><td>36</td><td>29</td><td>39</td></tr>
+      <tr><td>L</td><td>38</td><td>31</td><td>41</td></tr>
+      <tr><td>XL</td><td>40</td><td>33</td><td>43</td></tr>
+    </tbody>
+  </table>
+  <p class="size-guide-note">Model is 5'9" and wears a size S. Measurements are approximate.</p>
+</div>
+
+<!-- ALEXO Search Overlay -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <div class="search-overlay__inner">
+    <div class="search-overlay__top">
+      <div class="search-overlay__brand">ALEXO</div>
+      <button class="search-overlay__close" id="searchClose" type="button" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <form class="search-form" id="alexSearchForm" role="search">
+      <span class="search-form__label">Search ALEXO</span>
+      <input id="alexSearchInput" name="search" type="search" autocomplete="off" placeholder="What are you looking for?" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+
+    <section class="search-suggestions" aria-live="polite">
+      <div class="search-suggestions__heading">
+        <h2>Suggestions</h2>
+        <span id="searchSuggestionCount">Popular products</span>
+      </div>
+      <div class="search-suggestions__list" id="searchSuggestionsList"></div>
+    </section>
+
+    <section class="search-popular">
+      <p class="search-popular__title">Popular searches</p>
+      <div class="search-popular__list">
+        <button type="button" data-search-term="blazer">Blazers</button>
+        <button type="button" data-search-term="dress">Dresses</button>
+        <button type="button" data-search-term="shirt">Shirts</button>
+        <button type="button" data-search-term="shoes">Shoes</button>
+        <button type="button" data-search-term="bag">Bags</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="js/data-service.js"></script>
+<script src="js/products-data.js"></script>
+<script src="js/backend-config.js"></script>
+<script src="js/storefront-api.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+<script src="js/product.js"></script>
+</body>
+</html>
