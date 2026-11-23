@@ -4,6 +4,7 @@
   var cartService = window.ALEXO_CartService;
   var api = window.ALEXO_StorefrontApi;
   var state = { shippingMinor: 0, shippingCurrency: "NGN", shippingMethod: "" };
+  var checkoutEnabled = window.ALEXO_checkoutEnabled === true;
   var summaryItemCount = document.getElementById("summaryItemCount");
   var summaryItems = document.getElementById("summaryItems");
   var summarySubtotal = document.getElementById("summarySubtotal");
@@ -91,8 +92,14 @@
     var hasVariantIds = items.length > 0 && items.every(function (item) {
       return item.variantSku && Number.isInteger(Number(item.qty)) && Number(item.qty) > 0;
     });
-    placeOrderButton.disabled = !api.isConfigured() || !state.shippingMethod || !hasVariantIds;
+    placeOrderButton.disabled = !checkoutEnabled || !api.isConfigured() ||
+      !state.shippingMethod || !hasVariantIds;
   }
+
+  window.addEventListener("alexo:checkout-availability", function (event) {
+    checkoutEnabled = Boolean(event.detail && event.detail.enabled === true);
+    updateButtonState();
+  });
 
   function loadShippingMethods() {
     if (!api.isConfigured()) {

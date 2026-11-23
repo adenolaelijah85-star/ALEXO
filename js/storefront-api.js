@@ -2,6 +2,7 @@
   "use strict";
 
   var config = window.ALEXO_BACKEND_CONFIG || {};
+  window.ALEXO_checkoutEnabled = false;
 
   function isConfigured() {
     return /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(config.supabaseUrl || "") &&
@@ -161,6 +162,19 @@
     });
   }
 
+  function applyCheckoutAvailability(settings) {
+    var enabled = Boolean(settings && settings.checkout_enabled === true);
+    window.ALEXO_checkoutEnabled = enabled;
+    document.querySelectorAll("[data-checkout-enabled-text][data-checkout-disabled-text]").forEach(function (element) {
+      element.textContent = enabled
+        ? element.getAttribute("data-checkout-enabled-text")
+        : element.getAttribute("data-checkout-disabled-text");
+    });
+    window.dispatchEvent(new CustomEvent("alexo:checkout-availability", {
+      detail: { enabled: enabled }
+    }));
+  }
+
   function applyPublicSettings(settings) {
     document.querySelectorAll("[data-policy]").forEach(function (link) {
       var url = secureUrl(settings[link.getAttribute("data-policy")]);
@@ -243,6 +257,7 @@
     getPublicSettings().then(function (rows) {
       var settings = Array.isArray(rows) ? rows[0] : null;
       if (settings) applyPublicSettings(settings);
+      applyCheckoutAvailability(settings);
       if (!settings || !settings.checkout_enabled) {
         var setupNotice = document.createElement("aside");
         setupNotice.className = "storefront-status-banner";
@@ -252,7 +267,10 @@
         document.body.insertBefore(setupNotice, document.body.firstChild);
       }
     }).catch(function (error) {
+      applyCheckoutAvailability(null);
       console.error("Could not load storefront settings:", error);
     });
+  } else {
+    applyCheckoutAvailability(null);
   }
 })();

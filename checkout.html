@@ -154,14 +154,17 @@
 
         <div class="payment-option is-selected">
           <span class="delivery-option__radio" aria-hidden="true"></span>
-          <span class="payment-option__label">Paystack hosted checkout (available after setup)</span>
+          <span class="payment-option__label">Paystack hosted checkout</span>
           <span class="payment-option__brands"><span>PAYSTACK</span></span>
         </div>
-        <p>Payment is currently unavailable. Card details are not collected on this page.</p>
+        <p id="paymentAvailabilityMessage"
+          data-checkout-enabled-text="Paystack hosted checkout is enabled. Card details are entered on Paystack, not on this page."
+          data-checkout-disabled-text="Payment is currently unavailable. Card details are not collected on this page.">Checking payment availability…</p>
 
         <p class="secure-line">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-          Checkout will be available after the store completes payment setup.
+          <span data-checkout-enabled-text="You will be redirected to Paystack to securely complete payment."
+            data-checkout-disabled-text="Checkout will be available after the store completes payment setup.">Checking payment availability…</span>
         </p>
       </div>
     </div>
@@ -205,7 +208,8 @@
 
         <div class="secure-note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/></svg>
-          <div><strong>Checkout status</strong><span>Payments are unavailable during store setup</span></div>
+          <div><strong>Checkout status</strong><span data-checkout-enabled-text="Paystack hosted checkout is enabled."
+            data-checkout-disabled-text="Payments are unavailable during store setup">Checking payment availability…</span></div>
         </div>
       </div>
     </aside>
@@ -233,7 +237,8 @@
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        <div><strong>Payment</strong><span>Checkout setup is in progress</span></div>
+        <div><strong>Payment</strong><span data-checkout-enabled-text="Pay securely through Paystack hosted checkout."
+          data-checkout-disabled-text="Checkout setup is in progress">Checking payment availability…</span></div>
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3z"/><path d="M3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>

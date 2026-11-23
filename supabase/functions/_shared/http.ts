@@ -61,12 +61,29 @@ export function adminHeaders(url: string, key: string): HeadersInit {
   };
 }
 
+export class StoreError extends Error {}
+
+function serviceKey(): string {
+  const legacy = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (legacy) return legacy;
+  const raw = Deno.env.get("SUPABASE_SECRET_KEYS");
+  if (raw) {
+    try {
+      const keys = JSON.parse(raw) as Record<string, string>;
+      if (keys.default) return keys.default;
+    } catch (_) {
+      /* fall through to the error below */
+    }
+  }
+  throw new Error("Missing server configuration: SUPABASE_SERVICE_ROLE_KEY");
+}
+
 export async function callRpc<T>(
   name: string,
   args: Record<string, unknown>,
 ): Promise<T> {
   const url = requiredEnv("SUPABASE_URL").replace(/\/+$/, "");
-  const key = requiredEnv("SUPABASE_SERVICE_ROLE_KEY");
+  const key = serviceKey();
   const response = await fetch(`${url}/rest/v1/rpc/${name}`, {
     method: "POST",
     headers: adminHeaders(url, key),
@@ -75,6 +92,13 @@ export async function callRpc<T>(
   const result = await response.text();
   if (!response.ok) {
     console.error(`Supabase RPC ${name} failed:`, response.status, result);
+    let parsed: { code?: string; message?: string } = {};
+    try {
+      parsed = JSON.parse(result);
+    } catch (_) {
+      /* not JSON */
+    }
+    if (parsed.code === "P0001" && parsed.message) throw new StoreError(parsed.message);
     throw new Error("The store could not complete this request.");
   }
   return result ? JSON.parse(result) as T : null as T;

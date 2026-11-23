@@ -5,6 +5,7 @@ import {
   randomToken,
   requiredEnv,
   sha256,
+  StoreError,
 } from "../_shared/http.ts";
 
 type CheckoutPayload = {
@@ -115,6 +116,9 @@ Deno.serve(async (request: Request) => {
     }, 200, origin);
   } catch (error) {
     console.error("create-payment failed:", error);
+    if (error instanceof StoreError && !referenceToRelease) {
+      return jsonResponse({ error: error.message }, 409, origin);
+    }
     if (referenceToRelease) {
       try {
         await callRpc("fail_store_order", {
